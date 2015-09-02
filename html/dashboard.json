@@ -26,7 +26,7 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "<script src=\"//bitdash-a.akamaihd.net/bitmovin-portal/55d48e6894ce7/5f2900ea75/latest/bitdash.min.js\"></script><div id=\"player\"></div>\n<script type=\"text/javascript\">\n    var conf = {\n        key:       \"ce6a32667d688882b56e34bb82fa5f3c\",\n        source: {\n          mpd:         '//spidvid.marine.ie/dash/spiddal1.mpd',\n          hls:         '//spidvid.marine.ie/hls/spiddal1.m3u8',\n          poster:      '//spidvid.marine.ie/logo.jpg'\n        }\n    };\n    var player = bitdash(\"player\").setup(conf);\n</script>",
+						"html": "<script src=\"//bitdash-a.akamaihd.net/bitmovin-portal/55d48e6894ce7/5f2900ea75/latest/bitdash.min.js\"></script><div id=\"player\"></div>\n<script type=\"text/javascript\">\n    var conf = {\n        key:       \"ce6a32667d688882b56e34bb82fa5f3c\",\n        source: {\n          mpd:         '/spidvid/dash/spiddal1.mpd',\n          hls:         '/spidvid/hls/spiddal1.m3u8',\n          poster:      '/spidvid/logo.jpg'\n        }\n    };\n    var player = bitdash(\"player\").setup(conf);\n</script>",
 						"height": 4
 					}
 				}
