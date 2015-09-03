@@ -11,6 +11,11 @@ Installation
     sudo ln -s /etc/nginx/sites-available/spiddal.marine.ie.conf /etc/nginx/sites-enabled
     sudo service nginx reload
 
+On the firewall gateway proxy, copy the proxy config
+
+    sudo cp spiddal.marine.ie.proxy.conf /etc/nginx/sites-available/
+    sudo ln -s /etc/nginx/sites-available/spiddal.marine.ie.proxy.conf /etc/nginx/sites-enabled
+    sudo service nginx reload
 
 Developing the Dashboard
 ========================
