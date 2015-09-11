@@ -8,26 +8,21 @@
 			"width": 1,
 			"row": {
 				"3": 1,
-				"3.5": 1
+				"3.5": 1,
+				"3.1": 1
 			},
 			"col": {
 				"3": 1,
-				"3.5": 1
+				"3.5": 1,
+				"3.1": 1
 			},
-			"col_width": 1.5,
+			"col_width": 2.1,
 			"widgets": [
 				{
 					"type": "html",
 					"settings": {
-						"html": "<img src=\"http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Marine_logo.jpg\">",
-						"height": 1.5
-					}
-				},
-				{
-					"type": "html",
-					"settings": {
-						"html": "<script src=\"//bitdash-a.akamaihd.net/bitmovin-portal/55d48e6894ce7/5f2900ea75/latest/bitdash.min.js\"></script><div id=\"player\"></div>\n<script type=\"text/javascript\">\n    var conf = {\n        key:       \"ce6a32667d688882b56e34bb82fa5f3c\",\n        source: {\n          mpd:         '/spidvid/dash/spiddal1.mpd',\n          hls:         '/spidvid/hls/spiddal1.m3u8',\n          poster:      '/spidvid/logo.jpg'\n        }\n    };\n    var player = bitdash(\"player\").setup(conf);\n</script>",
-						"height": 4
+						"html": "<script src=\"//bitdash-a.akamaihd.net/bitmovin-portal/55d48e6894ce7/5f2900ea75/latest/bitdash.min.js\"></script><div id=\"player\"></div>\n<script type=\"text/javascript\">\n    var conf = {\n        key:       \"ce6a32667d688882b56e34bb82fa5f3c\",\n        source: {\n          mpd:         '/spidvid/dash/spiddal1.mpd',\n          hls:         '/spidvid/hls/spiddal1.m3u8',\n          poster:      'snap.jpg'\n        }\n    };\n    var player = bitdash(\"player\").setup(conf);\n</script>",
+						"height": 6
 					}
 				}
 			]
