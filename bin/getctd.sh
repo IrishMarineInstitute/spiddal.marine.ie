@@ -1,0 +1,2 @@
+#!/bin/sh
+nc -d 172.16.255.5 950 | head -n 4 | grep -e '[0-9]'  | head -n 1 | python -c 'import sys,json; [Press,Temp,Cond,Sal,SoundV,Time] = sys.stdin.readline().split(); print json.dumps({"Press": float(Press),"Temp": float(Temp), "Cond": float(Cond), "Sal": float(Sal), "SoundV": float(SoundV), "Time": Time})' > /home/dmuser/sites/spiddal.marine.ie/html/data/spiddal-ctd.json.new && mv /home/dmuser/sites/spiddal.marine.ie/html/data/spiddal-ctd.json.new /home/dmuser/sites/spiddal.marine.ie/html/data/spiddal-ctd.json
