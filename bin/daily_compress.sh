@@ -1,7 +1,9 @@
 #!/bin/sh
 DATA_DIR="/home/dmuser/sites/spiddal.marine.ie/html/data"
-TYPES="hydrophones"
+TYPES="hydrophones ctds fluorometers"
 hydrophones="SBF1323"
+ctds="SPIDCTD"
+fluorometers="SPIDFLNTU"
 DIR_DATE=$(date -d "yesterday 13:00 " '+%Y/%m/%d')
 FILE_DATE=$(date -d "yesterday 13:00 " '+%Y%m%d')
 for TYPE in $(echo $TYPES);
