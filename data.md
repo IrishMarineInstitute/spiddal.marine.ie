@@ -1,7 +1,7 @@
 % Galway Bay Cable Observatory Data Files
 % Adam Leadbetter
 % 2015-09-28
-#Galway Bay Cable Observatory Data Files
+
 ## Table of Contents
 
  1. [General Directory Structure](#general-directory-structure)
