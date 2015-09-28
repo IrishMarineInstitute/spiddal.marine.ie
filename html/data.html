@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Adam Leadbetter">
+  <meta name="dcterms.date" content="2015-09-28">
+  <title>Galway Bay Cable Observatory Data Files</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+      <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+<header>
+<h1 class="title">Galway Bay Cable Observatory Data Files</h1>
+<h2 class="author">Adam Leadbetter</h2>
+<h3 class="date">2015-09-28</h3>
+</header>
+<h1 id="galway-bay-cable-observatory-data-files">Galway Bay Cable Observatory Data Files</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="#general-directory-structure">General Directory Structure</a></li>
+<li><a href="#instruments">Instruments</a>
+<ol type="1">
+<li><a href="#conductivity-temperature-depth-sensor">Conductivity Temperature Depth sensor</a></li>
+<li><a href="#fluorometer">Fluorometer</a></li>
+</ol></li>
+</ol>
+<h2 id="general-directory-structure">General Directory Structure</h2>
+<p>The data files are arranged in a directory structure by instrument type, specific instrument, and then year, month, day e.g.</p>
+<pre><code>- {InstrumentTypeA}
+    | - {InstrumentMakeModelSerialNumberA}
+        |- 2015
+            |- 10
+                |- 01
+                |- 02
+- {InstrumentTypeB}
+    |- {InstrumentMakeModelSerialNumberB}
+        |-2015
+            |- 10
+                |- 01
+                |- 02</code></pre>
+<p>During the day, data files are streamed from the sensors to these directories. At the end of the day both a .zip and a .tar.gz compressed archive of the day's files is created in the folder, and for certain instrument types a concatenated version of the day's files is created removing the individual files streamed in during the day. At the end of a month, a .zip and a .tar.gz archive for the full month is also created for ease of data delivery. ## Instruments ### Conductivity Temperature Depth sensor An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
+<p>The data files produced by the CTD are available <a href="http://spiddal.marine.ie/data/ctds/I-OCEAN7-304-XXXX/">here</a>. The data files contain the following columns:</p>
+<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
+<ul>
+<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
+<ul>
+<li>YYYY is the year</li>
+<li>MM is the month number within the year (e.g. 03 for March)</li>
+<li>DD is the day number within the month</li>
+<li>T delimits between the date and time</li>
+<li>hh is the hour within the day</li>
+<li>mm is the minute within the hour</li>
+<li>ss.sss is the second.milliseconds within the minute</li>
+<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+</ul></li>
+<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
+<li><a href="http://vocab.nerc.ac.uk/collection/P07/current/CFSN0330/">Seawater pressure</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPDB/">decibars</a></li>
+<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/">Temperature of the seawater</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
+<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/CNDCST01/">Electrical conductivity</a> of the seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UECA/">Siemens per metre</a></li>
+<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/PSALCU01/">Salinity</a> of the seawater (salinity has <a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/SVELCV01/">Sound velocity</a> in seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVAA/">metres per second</a></li>
+<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSDD01/">time</a> stamp in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss.ss</a>M ###Fluorometer A <a href="http://wetlabs.com/eco-flntu">WetLabs</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0215/">ECO-FLNTU</a> (serial number #3137) is installed on the observatory infrastructure. It measures the fluorescence of the seawater to give an estimate of the volume of chlorophyll present (indicative of the amount of phytoplankton in the seawater) and it measures turbidity, or the &quot;cloudiness&quot; of the seawater, caused by the presence of particles such as sediment from the seabed suspended in the water.</li>
+</ul>
+<p>The data files produced by the fluorometer are available <a href="http://spiddal.marine.ie/data/fluorometers/WL-ECO-FLNTU-3137/">here</a>. The data files contain the following columns:</p>
+<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
+<ul>
+<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
+<ul>
+<li>YYYY is the year</li>
+<li>MM is the month number within the year (e.g. 03 for March)</li>
+<li>DD is the day number within the month</li>
+<li>T delimits between the date and time</li>
+<li>hh is the hour within the day</li>
+<li>mm is the minute within the hour</li>
+<li>ss.sss is the second.milliseconds within the minute</li>
+<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+</ul></li>
+<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
+<li>Instrument clock date in the format MM/DD/YYYY</li>
+<li>Instrument clock <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSAA01/">time</a> in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss</a></li>
+<li>Wavelength of light used to make fluorescence measurements in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
+<li>Chlorophyll fluorometer instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/FCNTRW01/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+<li>Wavelength of light used to make turbidity measurements in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
+<li>Optical scattering turbidity sensor instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/NVLTOBS1/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+<li>Thermistor</li>
+</ul>
+<!-- google analytics code to go here -->
+</body>
+</html>
