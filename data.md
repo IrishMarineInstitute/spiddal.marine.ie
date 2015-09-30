@@ -25,9 +25,12 @@ The data files are arranged in a directory structure by instrument type, specifi
 					|- 01
 					|- 02
 
-During the day, data files are streamed from the sensors to these directories. At the end of the day both a .zip and a .tar.gz compressed archive of the day's files is created in the folder, and for certain instrument types a concatenated version of the day's files is created removing the individual files streamed in during the day. At the end of a month, a .zip and a .tar.gz archive for the full month is also created for ease of data delivery.
+During the day, data files are streamed from the sensors to these directories. At the end of the day an archive file is created containing the full set of data produced during the day. For line oriented data, a single .txt file containing the concatenated results is created. For file oriented data, both a .zip and a .tar.gz compressed archive of the day's files is created in the folder. Once the daily archive has been produced, the individual files may be removed. After the end of a month, a .zip and a .tar.gz archive for the full month is also created for ease of data delivery.
+
 ## Instruments
+
 ### Conductivity Temperature Depth sensor
+
 An [Idronaut Ocean-Seven][1] [304][2] Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea. 
 
 The data files produced by the CTD are available [here][3]. The data files contain the following columns:
@@ -50,7 +53,9 @@ The data files produced by the CTD are available [here][3]. The data files conta
  - [Salinity][11] of the seawater (salinity has [no units][12])
  - [Sound velocity][13] in seawater in [metres per second][14]
  - Instrument [time][15] stamp in the format [hh:mm:ss.ss][16]M
+
 ###Fluorometer
+
 A [WetLabs][17] [ECO-FLNTU][18] (serial number #3137) is installed on the observatory infrastructure. It measures the fluorescence of the seawater to give an estimate of the volume of chlorophyll present (indicative of the amount of phytoplankton in the seawater) and it measures turbidity, or the "cloudiness" of the seawater, caused by the presence of particles such as sediment from the seabed suspended in the water.
 
 The data files produced by the fluorometer are available [here][19]. The data files contain the following columns:
