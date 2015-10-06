@@ -25,7 +25,7 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "<script src=\"//bitdash-a.akamaihd.net/bitmovin-portal/55d48e6894ce7/5f2900ea75/latest/bitdash.min.js\"></script><div id=\"player\"></div>\n<script type=\"text/javascript\">\n    var conf = {\n        key:       \"ce6a32667d688882b56e34bb82fa5f3c\",\n        source: {\n          mpd:         '/spidvid/dash/spiddal1.mpd',\n          hls:         '/spidvid/hls/spiddal1.m3u8',\n          poster:      'snap.jpg'\n        }, playback: {autoplay: true}\n    };\n    var player = bitdash(\"player\").setup(conf);\n</script>",
+						"html": "<div id=\"player\"><video id=\"video\" poster=\"snap.jpg\">\n    <source src=\"http://spiddal.marine.ie/spidvid/dash/spiddal1.mpd\" type=\"application/dash+xml\">\n    <source src=\"http://spiddal.marine.ie/spidvid/hls/spiddal1.m3u8\" type=\"application/x-mpegURL\">\n    Sorry, streaming video not supported in your browser.\n    </video>\n </div>\n<script src=\"hls.min.js\"></script>\n<script type=\"text/javascript\">\n  var video_ok=false;\n  try{ if(Hls.isSupported()) {\n    var video = document.getElementById('video');\n    var hls = new Hls();\n    hls.loadSource('http://spiddal.marine.ie/spidvid/hls/spiddal1.m3u8');\n    hls.attachVideo(video);\n    hls.on(Hls.Events.MANIFEST_PARSED,function() {\n      video.play();\n  });\n video_ok=true;\n}}catch(err){}\n if(!video_ok){\n }\n</script>",
 						"height": 6
 					}
 				}
@@ -57,7 +57,7 @@
 			"title": "Galway Weather",
 			"width": 1,
 			"row": {
-				"3": 9,
+				"3": 11,
 				"4": 15,
 				"5": 15,
 				"3.5": 15,
@@ -117,63 +117,6 @@
 						"size": "regular",
 						"value": "datasources[\"Galway\"][\"conditions\"]",
 						"animate": true
-					}
-				}
-			]
-		},
-		{
-			"title": "Galway Wave Buoy",
-			"width": 1,
-			"row": {
-				"3": 23,
-				"4": 21,
-				"5": 21,
-				"4.1": 15
-			},
-			"col": {
-				"3": 3,
-				"4": 3,
-				"5": 3,
-				"4.1": 1
-			},
-			"col_width": 1,
-			"widgets": [
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "Time of Last reading",
-						"size": "regular",
-						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][2].substring(11,19)",
-						"animate": true,
-						"units": "UTC time"
-					}
-				},
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "Sea Surface Temperature",
-						"size": "regular",
-						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][8]",
-						"sparkline": true,
-						"animate": true,
-						"units": "&deg;C"
-					}
-				},
-				{
-					"type": "text_widget",
-					"settings": {
-						"title": "Significant Wave Height",
-						"size": "regular",
-						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][7]",
-						"animate": true,
-						"units": "cm"
-					}
-				},
-				{
-					"type": "google_map",
-					"settings": {
-						"lat": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][1]",
-						"lon": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][0]"
 					}
 				}
 			]
@@ -363,6 +306,63 @@
 						"sparkline": true,
 						"animate": true,
 						"units": "mS/cm"
+					}
+				}
+			]
+		},
+		{
+			"title": "Galway Wave Buoy",
+			"width": 1,
+			"row": {
+				"3": 25,
+				"4": 21,
+				"5": 21,
+				"4.1": 15
+			},
+			"col": {
+				"3": 3,
+				"4": 3,
+				"5": 3,
+				"4.1": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Time of Last reading",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][2].substring(11,19)",
+						"animate": true,
+						"units": "UTC time"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Sea Surface Temperature",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][8]",
+						"sparkline": true,
+						"animate": true,
+						"units": "&deg;C"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Significant Wave Height",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][7]",
+						"animate": true,
+						"units": "cm"
+					}
+				},
+				{
+					"type": "google_map",
+					"settings": {
+						"lat": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][1]",
+						"lon": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][0]"
 					}
 				}
 			]
