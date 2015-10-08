@@ -2,11 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <title>streaming video example html</title>
     <!-- as implemented here, jquery is required -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
+<div class="container">
 <h1>Streaming Video Example</h1>
 <p>This page gives an example of http streaming video (<a href="//en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> or <a href="//en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP">Dash</a>) across a wide range of web browsers (as of October 2015).</p>
 <div id="player"><video id="video" poster="snap.jpg" autoplay="autoplay" controls="controls">
@@ -114,11 +116,14 @@
 
   }
 </script>
+<p>(<b>NB:</b> Above video may appear black if it is night time in Ireland)</p>
 <p>One of HLS or Dash should work OK on many mobile devices.</p>
-<p>If the browser suppors neither, we load load the <a href="//github.com/dailymotion/hls.js">hls.js</a> library and try that.</p>
+<p>If the browser suppors neither, we load the <a href="//github.com/dailymotion/hls.js">hls.js</a> library and try that.</p>
 <p>If hls.js doesn't work, and the browser supports <a href="//en.wikipedia.org/wiki/Adobe_Flash">Flash</a>, fall back that by loading the libraries for the <a href="//flashls.org/">Flashls</a> plugin for <a href="//github.com/flowplayer/flowplayer">Flowplayer</a>.</p>
 <p>In any case, other than <a href="//jquery.com/">jquery</a>, the javascript libraries are only loaded if they are required.</p>
+<p>View this page source for full details.</a>
 <p>Happy Streaming!</p>
+</div>
 </body>
 </html>
 
