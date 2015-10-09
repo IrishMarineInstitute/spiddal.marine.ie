@@ -12,9 +12,9 @@
 <h1>Streaming Video Example</h1>
 <p>This page gives an example of http streaming video (<a href="//en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> or <a href="//en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP">Dash</a>) across a wide range of web browsers (as of October 2015).</p>
 <div id="player"><video id="video" poster="snap.jpg" autoplay="autoplay" controls="controls">
-    <source src="//spiddal.marine.ie/spidvid/dash/spiddal1.mpd" type="application/dash+xml">
-    <source src="//spiddal.marine.ie/spidvid/hls/spiddal1.m3u8" type="application/x-mpegURL">
-    <source src="//spiddal.marine.ie/spidvid/hls/spiddal1.m3u8" type="application/vnd.apple.mpegURL">
+    <source src="//spidvid.cloudapp.net/spidvid/dash/spiddal1.mpd" type="application/dash+xml">
+    <source src="//spidvid.cloudapp.net/spidvid/hls/spiddal1.m3u8" type="application/x-mpegURL">
+    <source src="//spidvid.cloudapp.net/spidvid/hls/spiddal1.m3u8" type="application/vnd.apple.mpegURL">
     Sorry, streaming video not supported in your browser.
     </video>
  </div>
@@ -37,7 +37,7 @@
      $("#video").removeAttr("controls");
      var video = document.getElementById('video');
      var hls = new Hls();
-     hls.loadSource('//spiddal.marine.ie/spidvid/hls/spiddal1.m3u8');
+     hls.loadSource('//spidvid.cloudapp.net/spidvid/hls/spiddal1.m3u8');
      hls.attachVideo(video);
      hls.on(Hls.Events.MANIFEST_PARSED, function() {
       video.play();
@@ -97,7 +97,7 @@
          },
          clip: {
           accelerated: true,
-           url: "http://spiddal.marine.ie/spidvid/hls/spiddal1.m3u8",
+           url: "http://spidvid.cloudapp.net/spidvid/hls/spiddal1.m3u8",
           urlResolvers: "httpstreaming",
           lang: "en",
           provider: "httpstreaming",
