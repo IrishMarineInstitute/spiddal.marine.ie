@@ -36,10 +36,12 @@
 			"width": 1,
 			"row": {
 				"3": 1,
+				"4": 1,
 				"4.1": 1
 			},
 			"col": {
 				"3": 3,
+				"4": 3,
 				"4.1": 3
 			},
 			"col_width": 1,
@@ -47,8 +49,18 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"//data.marine.ie/Content/Images/MI%20logo%20_%20ALL%20WHITE_inverted_Trasnparent_212x54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n</p>\n<p>\nResearchers please  see <a href=\"data.html\">spiddal.marine.ie/data.html</a> for details about data format, and download links.\n</p><p>Note this site works best in chrome browser.</p></div>\n",
+						"html": "<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"//data.marine.ie/Content/Images/MI%20logo%20_%20ALL%20WHITE_inverted_Trasnparent_212x54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n</p>\n<p>\nResearchers please  see <a href=\"data.html\">spiddal.marine.ie/data.html</a> for details about data format, and download links.\n</p></div>\n",
 						"height": 4
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "How many people are watching this?",
+						"value": [
+							"datasources[\"spidvid.cloudapp.net\"][\"connections\"]"
+						],
+						"legend": "Number of HTTP connections"
 					}
 				}
 			]
@@ -237,7 +249,7 @@
 			},
 			"col": {
 				"3": 1,
-				"4": 3,
+				"4": 4,
 				"5": 3,
 				"4.1": 1
 			},
@@ -412,6 +424,16 @@
 				"url": "http://spiddal.marine.ie/data/spiddal-fluorometer.json",
 				"use_thingproxy": true,
 				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "spidvid.cloudapp.net",
+			"type": "JSON",
+			"settings": {
+				"url": "/data/spidvid.cloudapp.net.json",
+				"use_thingproxy": true,
+				"refresh": 10,
 				"method": "GET"
 			}
 		}
