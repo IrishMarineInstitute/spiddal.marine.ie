@@ -49,7 +49,7 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"//data.marine.ie/Content/Images/MI%20logo%20_%20ALL%20WHITE_inverted_Trasnparent_212x54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n</p>\n<p>\nResearchers please  see <a href=\"data.html\">spiddal.marine.ie/data.html</a> for details about data format, and download links.\n</p></div>\n",
+						"html": "<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"//spiddal.marine.ie/Marine_logo_bw_212_x_54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n</p>\n<p>\nResearchers please  see <a href=\"data.html\">spiddal.marine.ie/data.html</a> for details about data format, and download links.\n</p></div>\n",
 						"height": 4
 					}
 				},
