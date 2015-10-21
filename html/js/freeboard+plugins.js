@@ -4476,26 +4476,26 @@ freeboard.loadDatasourcePlugin({
         type_name: "indicator",
         display_name: "Indicator Light",
         settings: [
-            {
-                name: "title",
-                display_name: "Title",
-                type: "text"
-            },
-            {
-                name: "value",
-                display_name: "Value",
-                type: "calculated"
-            },
-            {
-                name: "on_text",
-                display_name: "On Text",
-                type: "calculated"
-            },
-            {
-                name: "off_text",
-                display_name: "Off Text",
-                type: "calculated"
-            }
+	        {
+	            name: "title",
+	            display_name: "Title",
+	            type: "text"
+	        },
+	        {
+	            name: "value",
+	            display_name: "Value",
+	            type: "calculated"
+	        },
+	        {
+	            name: "on_text",
+	            display_name: "On Text",
+	            type: "calculated"
+	        },
+	        {
+	            name: "off_text",
+	            display_name: "Off Text",
+	            type: "calculated"
+	        }
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new indicatorWidget(settings));
@@ -4516,6 +4516,7 @@ freeboard.loadDatasourcePlugin({
                 var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
                 marker.setPosition(newLatLon);
                 map.panTo(newLatLon);
+				map.setZoom(currentPosition.zlev);
             }
         }
 
@@ -4626,6 +4627,9 @@ freeboard.loadDatasourcePlugin({
             else if (settingName == "lon") {
                 currentPosition.lon = newValue;
             }
+			else if (settingName == "zlev") {
+                currentPosition.zlev = newValue;
+            }
 
             updatePosition();
         }
@@ -4654,6 +4658,12 @@ freeboard.loadDatasourcePlugin({
                 name: "lon",
                 display_name: "Longitude",
                 type: "calculated"
+            },
+            {
+                name: "zlev",
+                display_name: "Zoom level",
+                type: "calculated",
+				default_value: "13"
             }
         ],
         newInstance: function (settings, newInstanceCallback) {

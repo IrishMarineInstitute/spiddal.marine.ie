@@ -55,7 +55,7 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "\n<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"Marine_logo_bw_212_x_54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n<a href=\"data.html\">Read more...</a>\n</p>\n<div id=\"fb-root\"></div>\n<script>(function(d, s, id) {\n  var js, fjs = d.getElementsByTagName(s)[0];\n  if (d.getElementById(id)) return;\n  js = d.createElement(s); js.id = id;\n  js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5\";\n  fjs.parentNode.insertBefore(js, fjs);\n}(document, 'script', 'facebook-jssdk'));</script>\n<div class=\"fb-share-button\" data-href=\"http://spiddal.marine.ie/\" data-layout=\"button_count\"></div>\n</div>\n<div style=\"padding: 10px\">\n<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-related=\"MarineInst\">Tweet</a>\n<script>(function(d,s,id){\n    var js,fjs=d.getElementsByTagName(s)[0];\n    if (d.getElementById(id)) return;\n    js = d.createElement(s); js.id = id;\n    js.src = '//platform.twitter.com/widgets.js';\n    fjs.parentNode.insertBefore(js,fjs);\n}(document, 'script', 'twitter-wjs'));</script>\n</div>\n\n",
+						"html": "\n<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"Marine_logo_bw_212_x_54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n<a href=\"/gallery/\">Read more...</a>\n</p>\n<div id=\"fb-root\"></div>\n<script>(function(d, s, id) {\n  var js, fjs = d.getElementsByTagName(s)[0];\n  if (d.getElementById(id)) return;\n  js = d.createElement(s); js.id = id;\n  js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5\";\n  fjs.parentNode.insertBefore(js, fjs);\n}(document, 'script', 'facebook-jssdk'));</script>\n<div class=\"fb-share-button\" data-href=\"http://spiddal.marine.ie/\" data-layout=\"button_count\"></div>\n</div>\n<div style=\"padding: 10px\">\n<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-related=\"MarineInst\">Tweet</a>\n<script>(function(d,s,id){\n    var js,fjs=d.getElementsByTagName(s)[0];\n    if (d.getElementById(id)) return;\n    js = d.createElement(s); js.id = id;\n    js.src = '//platform.twitter.com/widgets.js';\n    fjs.parentNode.insertBefore(js,fjs);\n}(document, 'script', 'twitter-wjs'));</script>\n</div>\n\n",
 						"height": 4
 					}
 				},
@@ -376,10 +376,11 @@
 					}
 				},
 				{
-					"type": "html",
+					"type": "google_map",
 					"settings": {
-						"html": "<iframe width=\"100%\" height=\"100%\" src=\"http://maps.google.com/maps?q=53.227,-9.271&z=7&output=embed\"></iframe>\n",
-						"height": 3
+						"lat": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][1]",
+						"lon": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][0]",
+						"zlev": "7"
 					}
 				}
 			]
