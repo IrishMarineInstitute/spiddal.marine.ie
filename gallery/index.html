@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+
+    <meta charset="utf-8">
+    <title>Image Gallery </title>
+    <meta name="description" content="Blueimp Image Gallery for Ireland’s Marine Test and Demonstration Facility for renewable energy located in Galway Bay.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/blueimp-gallery.css">
+    <link rel="stylesheet" href="css/blueimp-gallery-indicator.css">
+    <link rel="stylesheet" href="css/blueimp-gallery-video.css">
+
+    <link rel="stylesheet" href="css/spiddalGallery.css">
+</head>
+
+<body>
+    <div class="container header">
+
+        <img id="marineLogo" src="img/Marine_logo.jpg" alt="Marine Institute" title="Marine Institute">
+
+        <ul class="navigation">
+            <li><a href="http://www.marine.ie/">Home</a></li>
+            <li><a href="http://spiddal.marine.ie">Cable Observatory Dashboard</a></li>
+        </ul>
+
+    </div>
+    <div class="container">
+        <h1>Galway Bay Cable Observatory</h1>
+
+        <p>
+            The maximum discharge of wave energy from the Atlantic Ocean is along the west coasts of Ireland and Scotland. Harnessing the energy from those waves to be turned into a supply of electricity for domestic and industrial use requires the testing of devices capable of converting wave energy to electrical energy; ways of bringing that energy onshore; and understanding the maintenance of the energy capture devices.
+        </p>
+        <p>
+            Ireland’s Marine Test and Demonstration Facility for renewable energy is located in Galway Bay, and the cabled observatory is a key component of the facility. The power and data cable runs from the shore station in Spiddal to an underwater node. This node is a frame with various ports and socket for connecting a range of underwater sensors to the observatory system. The environmental data collected by this system will assist in evaluating test energy capture devices and their performance, reliability and longevity in a real-world marine setting.
+        </p>
+        <p>
+            The observatory in Galway Bay is an important contribution by Ireland to the growing global network of real-time data capture systems deployed within the ocean – technology giving us new insights into the ocean which we have not had before. Data can be viewed in real-time here and the data archives may be accessed here.
+        </p>
+
+
+        <!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+        <div id="blueimp-gallery-carousel" class="blueimp-gallery  blueimp-gallery-carousel">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+
+
+        <!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+        <!--<h2>Carousel video gallery</h2>
+        <div id="blueimp-video-carousel" class="blueimp-gallery blueimp-gallery-controls blueimp-gallery-carousel">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+        </div>
+        <br>-->
+        <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+        <span>Click a thumbnail to view fullscreen</span>
+        <div id="links">
+            <a href="images/1.jpg" title="1">
+                <img src="images/thumbnails/1.jpg" alt="1">
+            </a>
+            <a href="images/2.jpg" title="2">
+                <img src="images/thumbnails/2.jpg" alt="2">
+            </a>
+            <a href="images/3.jpg" title="3">
+                <img src="images/thumbnails/3.jpg" alt="3">
+            </a>
+            <a href="images/4.jpg" title="4">
+                <img src="images/thumbnails/4.jpg" alt="4">
+            </a>
+            <a href="images/5.jpg" title="5">
+                <img src="images/thumbnails/5.jpg" alt="5">
+            </a>
+            <a href="images/6.jpg" title="6">
+                <img src="images/thumbnails/6.jpg" alt="6">
+            </a>
+            <a href="images/7.jpg" title="7">
+                <img src="images/thumbnails/7.jpg" alt="7">
+            </a>
+            <a href="images/8.jpg" title="8">
+                <img src="images/thumbnails/8.jpg" alt="8">
+            </a>
+            <a href="images/9.jpg" title="9">
+                <img src="images/thumbnails/9.jpg" alt="9">
+            </a>
+            <a href="images/10.jpg" title="10">
+                <img src="images/thumbnails/10.jpg" alt="10">
+            </a>
+        </div>
+
+        <div id="blueimp-gallery" class="blueimp-gallery">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="close">×</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
+
+
+
+
+
+
+        <script src="js/blueimp-helper.js"></script>
+        <script src="js/blueimp-gallery.js"></script>
+        <script src="js/blueimp-gallery-fullscreen.js"></script>
+        <script src="js/blueimp-gallery-indicator.js"></script>
+        <script src="js/blueimp-gallery-video.js"></script>
+        <script src="js/blueimp-gallery-vimeo.js"></script>
+        <script src="js/blueimp-gallery-youtube.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+        <script>
+            /*jslint evil: true */
+            /*global window, document*/
+            // Including jQuery via the protocol relative url above works for both http and https.
+            // Explicitly including jQuery via https allows running the Gallery demo as local file:
+            if (!window.jQuery) {
+                document.write(
+                    '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><\/script>'
+                );
+            }
+        </script>
+
+        <script src="js/jquery.blueimp-gallery.js"></script>
+
+        <script>
+            document.getElementById('links').onclick = function (event) {
+                event = event || window.event;
+                var target = event.target || event.srcElement,
+                    link = target.src ? target.parentNode : target,
+                    options = { index: link, event: event },
+                    links = this.getElementsByTagName('a');
+                blueimp.Gallery(links, options);
+            };
+        </script>
+
+
+        <script>
+            blueimp.Gallery(
+                document.getElementById('links').getElementsByTagName('a'),
+                {
+                    container: '#blueimp-gallery-carousel',
+                    carousel: true
+                }
+            );
+        </script>
+    </div>
+</body>
+</html>
