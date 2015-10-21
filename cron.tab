@@ -27,6 +27,8 @@
 
 */1 * * * * rsync -avz --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/hydrophone/Data/ /home/dmuser/incoming/hydrophones
 */1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/hydrophones/*.txt); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/hydrophones/$(echo $item| sed -e 's#^.*/\(\(.......\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
+*/1 * * * * rsync -avz --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/adcp/ /home/dmuser/incoming/adcps
+*/1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/adcps/*.pd0); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/adcps/$(echo $item| sed -e 's#^.*/\(\([^_]*\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
 */1 * * * * rsync -avz --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/fluorometer/Data/ /home/dmuser/incoming/fluorometers
 */1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/fluorometers/*.txt); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/fluorometers/$(echo $item| sed -e 's#^.*/\(\([^_]*\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
 */1 * * * * rsync -avz --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/ctd/Data/ /home/dmuser/incoming/ctds
