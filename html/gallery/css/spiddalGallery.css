@@ -44,7 +44,7 @@ body {
     margin-left: -20px;
 }
 
-a {
+a.nav {
     color: #717C85;
     text-decoration: none;
     text-transform: uppercase;
