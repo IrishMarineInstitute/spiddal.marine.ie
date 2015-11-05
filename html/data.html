@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="sc: http://schema.org/">
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
@@ -95,7 +95,16 @@
         </ul>
 
     </div>
-<div class="container">
+<div class="container" about="http://spiddal.marine.ie/data" typeOf="sc:DataCatalog">
+
+	<span property="sc:name" content="Galway Bay Cable Observatory Data Files"></span>
+	<span property="sc:url" href="http://spiddal.marine.ie/data.html"></span>
+	<span property="sc:creator" href="http://www.marine.ie"></span>
+	<span property="sc:publisher" href="http://www.marine.ie"></span>
+	<span property="sc:dataset" href="http://spiddal.marine.ie/ctd"></span>
+	<span property="sc:dataset" href="http://spiddal.marine.ie/adcp"></span>
+	<span property="sc:dataset" href="http://spiddal.marine.ie/fluorometer"></span>
+	<span property="sc:dataset" href="http://spiddal.marine.ie/hydrophone"></span>
 	
 	<header>
 		<h1 class="title">Galway Bay Cable Observatory Data Files</h1>
@@ -129,31 +138,34 @@
 					|- 02</code></pre>
 	<p>During the day, data files are streamed from the sensors to these directories. At the end of the day an archive file is created containing the full set of data produced during the day. For line oriented data, a single .txt file containing the concatenated results is created. For file oriented data, both a .zip and a .tar.gz compressed archive of the day's files is created in the folder. Once the daily archive has been produced, the individual files may be removed. After the end of a month, a .zip and a .tar.gz archive for the full month is also created for ease of data delivery.</p>
 	<h2 id="instruments">Instruments</h2>
-	<h3 id="conductivity-temperature-depth-sensor">Conductivity Temperature Depth sensor</h3>
-	<p>An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
-	<p>The data files produced by the CTD are available <a href="http://spiddal.marine.ie/data/ctds/I-OCEAN7-304-XXXX/">here</a>. The data files contain the following columns:</p>
-	<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
-	<ul>
-		<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
-			<ul>
-				<li>YYYY is the year</li>
-				<li>MM is the month number within the year (e.g. 03 for March)</li>
-				<li>DD is the day number within the month</li>
-				<li>T delimits between the date and time</li>
-				<li>hh is the hour within the day</li>
-				<li>mm is the minute within the hour</li>
-				<li>ss.sss is the second.milliseconds within the minute</li>
-				<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
-			</ul>
-		</li>
-		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
-		<li><a href="http://vocab.nerc.ac.uk/collection/P07/current/CFSN0330/">Seawater pressure</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPDB/">decibars</a></li>
-		<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/">Temperature of the seawater</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
-		<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/CNDCST01/">Electrical conductivity</a> of the seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UECA/">Siemens per metre</a></li>
-		<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/PSALCU01/">Salinity</a> of the seawater (salinity has <a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
-		<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/SVELCV01/">Sound velocity</a> in seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVAA/">metres per second</a></li>
-		<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSDD01/">time</a> stamp in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss.ss</a>M</li>
-	</ul>
+	<span about="http://spiddal.marine.ie/ctd" typeOf="sc:Dataset">
+		<h3 id="conductivity-temperature-depth-sensor">Conductivity Temperature Depth sensor</h3>
+		
+		<p>An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
+		<p>The data files produced by the CTD are available <span property="sc:distribution" href="http://spiddal.marine.ie/ctdDownload"><span about="http://spiddal.marine.ie/ctdDownload" typeOf="sc:DataDownload"><a property="sc:contentURL" href="http://spiddal.marine.ie/data/ctds/I-OCEAN7-304-XXXX/">here</a></span><span>. The data files contain the following columns:</p>
+		<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
+		<ul>
+			<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
+				<ul>
+					<li>YYYY is the year</li>
+					<li>MM is the month number within the year (e.g. 03 for March)</li>
+					<li>DD is the day number within the month</li>
+					<li>T delimits between the date and time</li>
+					<li>hh is the hour within the day</li>
+					<li>mm is the minute within the hour</li>
+					<li>ss.sss is the second.milliseconds within the minute</li>
+					<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+				</ul>
+			</li>
+			<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
+			<li><a href="http://vocab.nerc.ac.uk/collection/P07/current/CFSN0330/">Seawater pressure</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPDB/">decibars</a></li>
+			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/">Temperature of the seawater</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
+			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/CNDCST01/">Electrical conductivity</a> of the seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UECA/">Siemens per metre</a></li>
+			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/PSALCU01/">Salinity</a> of the seawater (salinity has <a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/SVELCV01/">Sound velocity</a> in seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVAA/">metres per second</a></li>
+			<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSDD01/">time</a> stamp in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss.ss</a>M</li>
+		</ul>
+	</span>
 	<h3 id="fluorometer">Fluorometer</h3>
 	<p>A <a href="http://wetlabs.com/eco-flntu">WetLabs</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0215/">ECO-FLNTU</a> (serial number #3137) is installed on the observatory infrastructure. It measures the fluorescence of the seawater to give an estimate of the volume of chlorophyll present (indicative of the amount of phytoplankton in the seawater) and it measures turbidity, or the &quot;cloudiness&quot; of the seawater, caused by the presence of particles such as sediment from the seabed suspended in the water.</p>
 	<p>The data files produced by the fluorometer are available <a href="http://spiddal.marine.ie/data/fluorometers/WL-ECO-FLNTU-3137/">here</a>. The data files contain the following columns:</p>
@@ -238,6 +250,30 @@
 
 <script type="text/javascript" src="http://www.marine.ie/Home/sites/all/modules/eu-cookie-compliance/js/eu_cookie_compliance.js?nw99bx"></script>
 <script type="text/javascript" src="http://www.marine.ie/Home/sites/all/libraries/share42/share42.js?nw99bx"></script>
+
+<span about="http://www.marine.ie" typeOf="sc:Organization">
+	<span property="sc:name" content="Marine Institute"></span>
+	<span property="sc:address" href="http://www.marine.ie#PostalAddress"></span>
+	<span property="sc:logo" href="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Marine_logo.jpg"></span>
+	<span property="sc:alternateName" content="Foras na Mara"></span>
+	<span property="sc:description" content="The Marine Institute (Foras na Mara) is the national agency responsible to the Irish government for advice on and implementation of marine research, technology, development and innovation (RTDI) policy and marine research services that critically inform policy objectives, management and sustainable development strategies for marine resources."></span>
+</span>
+
+<span about="http://www.marine.ie#PostalAddress" typeOf="sc:PostalAddress">
+	<span property="sc:streetAddress" content="Rinville"></span>
+	<span property="sc:addressLocality" content="Oranmore"></span>
+	<span property="sc:addressRegion" content="Galway"></span>
+	<span property="sc:addressCountry" content="IE"></span>
+</span>
+
+<span about="http://spiddal.marine.ie/adcp" typeOf="sc:Dataset">
+</span>
+
+<span about="http://spiddal.marine.ie/hydrophone" typeOf="sc:Dataset">
+</span>
+
+<span about="http://spiddal.marine.ie/fluorometer" typeOf="sc:Dataset">
+</span>
 
 <!-- google analytics code to go here -->
 </body>
