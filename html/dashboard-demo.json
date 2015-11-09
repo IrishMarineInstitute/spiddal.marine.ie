@@ -1,0 +1,449 @@
+{
+	"version": 1,
+	"allow_edit": false,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Spiddal Camera feed (20m)",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"3.5": 1,
+				"3.1": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"3.5": 1,
+				"3.1": 1
+			},
+			"col_width": 2.1,
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "<div id=\"player\"><video id=\"video\" poster=\"snap.jpg\" autoplay=\"autoplay\" loop=\"true\" controls=\"controls\" preload=\"metadata\">\n   <source src=\"http://spidvid.cloudapp.net/recordings/20151020-141746.webm\" type=\"video/webm\"> <source src=\"http://spidvid.cloudapp.net/recordings/20151020-141746.mp4\" type=\"video/mp4\">\n</video></div>",
+						"height": 6
+					}
+				}
+			]
+		},
+		{
+			"title": "spiddal.marine.ie",
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"4.1": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 3,
+				"5": 3,
+				"4.1": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "\n<div style=\"padding: 10px\"><a href=\"//www.marine.ie\"><img src=\"Marine_logo_bw_212_x_54.png\" alt=\"Marine Institute\" ></a>\n<p>\nThis site provides live and archived data from the Atlantic Ocean cabled undersea observatory beneath Galway Bay, just off Spiddal, Co. Galway, Ireland.\n<a href=\"/gallery/\">Read more...</a>\n</p>\n<div id=\"fb-root\"></div>\n<script>(function(d, s, id) {\n  var js, fjs = d.getElementsByTagName(s)[0];\n  if (d.getElementById(id)) return;\n  js = d.createElement(s); js.id = id;\n  js.src = \"//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5\";\n  fjs.parentNode.insertBefore(js, fjs);\n}(document, 'script', 'facebook-jssdk'));</script>\n<div class=\"fb-share-button\" data-href=\"http://spiddal.marine.ie/\" data-layout=\"button_count\"></div>\n</div>\n<div style=\"padding: 10px\">\n<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-related=\"MarineInst\">Tweet</a>\n<script>(function(d,s,id){\n    var js,fjs=d.getElementsByTagName(s)[0];\n    if (d.getElementById(id)) return;\n    js = d.createElement(s); js.id = id;\n    js.src = '//platform.twitter.com/widgets.js';\n    fjs.parentNode.insertBefore(js,fjs);\n}(document, 'script', 'twitter-wjs'));</script>\n</div>\n\n",
+						"height": 4
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "How many people are watching this?",
+						"value": [
+							"datasources[\"spidvid.cloudapp.net\"][\"connections\"]"
+						],
+						"legend": "Number of HTTP connections"
+					}
+				}
+			]
+		},
+		{
+			"title": "OpenWeatherMap",
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 15,
+				"4": 15,
+				"5": 15,
+				"3.5": 15,
+				"4.1": 15
+			},
+			"col": {
+				"2": 2,
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"3.5": 1,
+				"4.1": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Spiddal Current Air Temperature",
+						"size": "regular",
+						"value": "datasources[\"Spiddal OpenWeatherMap\"][\"main\"][\"temp\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "&degC"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Conditions",
+						"size": "regular",
+						"value": "datasources[\"Spiddal OpenWeatherMap\"][\"weather\"][0][\"description\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Sunrise",
+						"size": "regular",
+						"value": "new Date(datasources[\"Spiddal OpenWeatherMap\"][\"sys\"][\"sunrise\"]*1000).toLocaleTimeString()\n",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Sunset",
+						"size": "regular",
+						"value": "new Date(datasources[\"Spiddal OpenWeatherMap\"][\"sys\"][\"sunset\"]*1000).toLocaleTimeString()",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "WetLabs Fluorometer",
+			"width": 1,
+			"row": {
+				"2": 27,
+				"3": 15,
+				"4": 15,
+				"5": 15,
+				"4.1": 15
+			},
+			"col": {
+				"2": 2,
+				"3": 2,
+				"4": 2,
+				"5": 2,
+				"4.1": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Last reading",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"Time\"]",
+						"animate": true,
+						"units": ""
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Chlorophyll Concentration",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"CHL\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "&micro;g&#47;l"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Nephelometric Turbidity Unit (NTU)",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"NTU\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "NTU"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Graph",
+						"value": [
+							"datasources[\"spidFluor\"][\"CHL\"]",
+							"datasources[\"spidFluor\"][\"NTU\"]"
+						],
+						"include_legend": true,
+						"legend": "CHL,NTU"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "CHL",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"CHLCount\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "counts"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "NTU",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"NTUCount\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "counts"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Flourescence wavelength",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"FluorescenceWavelength\"]",
+						"animate": true,
+						"units": "nm"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Turbidity Wavelength",
+						"size": "regular",
+						"value": "datasources[\"spidFluor\"][\"TurbidityWavelength\"]",
+						"animate": true,
+						"units": "nm"
+					}
+				}
+			]
+		},
+		{
+			"title": "Spiddal Observatory CTD",
+			"width": 1,
+			"row": {
+				"2": 29,
+				"3": 15,
+				"4": 1,
+				"5": 1,
+				"4.1": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"4": 4,
+				"5": 4,
+				"4.1": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "time of last record",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"Time\"].substring(0,8)",
+						"sparkline": false,
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "sea water temperature (20m)",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"Temp\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "&deg;C"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "salinity",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"Sal\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "PSU"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "pressure",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"Press\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "dbar"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "sound velocity",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"SoundV\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "m/s"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "conductivity",
+						"size": "regular",
+						"value": "datasources[\"ctd\"][\"Cond\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "mS/cm"
+					}
+				}
+			]
+		},
+		{
+			"title": "Galway Wave Buoy",
+			"width": 1,
+			"row": {
+				"2": 53,
+				"3": 27,
+				"4": 15,
+				"5": 15,
+				"4.1": 15
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 3,
+				"5": 3,
+				"4.1": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Time of Last reading",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][2].substring(11,19)",
+						"animate": true,
+						"units": "UTC time"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Sea Surface Temperature",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][8]",
+						"sparkline": true,
+						"animate": true,
+						"units": "&deg;C"
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Significant Wave Height",
+						"size": "regular",
+						"value": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][7]",
+						"animate": true,
+						"units": "cm"
+					}
+				},
+				{
+					"type": "google_map",
+					"settings": {
+						"lat": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][1]",
+						"lon": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][0]",
+						"zlev": "7"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Time Now",
+			"type": "clock",
+			"settings": {
+				"refresh": 1
+			}
+		},
+		{
+			"name": "ctd",
+			"type": "JSON",
+			"settings": {
+				"url": "http://spiddal.marine.ie/data/spiddal-ctd.json",
+				"use_thingproxy": false,
+				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "gwaveBuoy",
+			"type": "JSON",
+			"settings": {
+				"url": "http://erddap.marine.ie/erddap/tabledap/IWaveBNetwork.json?longitude,latitude,time,station_id,PeakPeriod,PeakDirection,UpcrossPeriod,SignificantWaveHeight,SeaTemperature&time>=2015-09-14T00:00:00Z&station_id=%22Galway%20Bay%20Wave%20Buoy%22&orderByMax(%22time%22)",
+				"use_thingproxy": true,
+				"refresh": 600,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "spidFluor",
+			"type": "JSON",
+			"settings": {
+				"url": "http://spiddal.marine.ie/data/spiddal-fluorometer.json",
+				"use_thingproxy": true,
+				"refresh": 5,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "spidvid.cloudapp.net",
+			"type": "JSON",
+			"settings": {
+				"url": "/data/spidvid.cloudapp.net.json",
+				"use_thingproxy": true,
+				"refresh": 10,
+				"method": "GET"
+			}
+		},
+		{
+			"name": "Spiddal OpenWeatherMap",
+			"type": "JSON",
+			"settings": {
+				"url": "/data/spiddal-openweathermap.json",
+				"use_thingproxy": true,
+				"refresh": 30,
+				"method": "GET"
+			}
+		}
+	],
+	"columns": 5
+}
