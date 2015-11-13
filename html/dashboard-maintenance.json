@@ -62,7 +62,7 @@
 			]
 		},
 		{
-			"title": "Maintenance Notice",
+			"title": "",
 			"width": 1,
 			"row": {
 				"3": 1,
@@ -77,8 +77,8 @@
 				{
 					"type": "html",
 					"settings": {
-						"html": "<p>The Spiddal Cabled Underwater Observatory is currently undergoing maintenance.</p>\n<p>Data feeds will be restored when maintenance is complete.</p>",
-						"height": 3
+						"html": "<h3>The Underwater Observatory is currently undergoing maintenance.</h3>\n<p>Data feeds will be restored when maintenance is complete.</p>",
+						"height": 2
 					}
 				}
 			]
