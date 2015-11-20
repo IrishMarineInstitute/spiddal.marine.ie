@@ -156,7 +156,7 @@
 					"settings": {
 						"title": "Last reading",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"Time\"]",
+						"value": "datasources[\"spidFluor\"][\"Timestamp\"].substring(11).substring(0,8)",
 						"animate": true,
 						"units": ""
 					}
@@ -263,7 +263,7 @@
 					"settings": {
 						"title": "time of last record",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Time\"].substring(0,8)",
+						"value": "datasources[\"ctd\"][\"Timestamp\"].substring(11).substring(0,8)",
 						"sparkline": false,
 						"animate": true
 					}
