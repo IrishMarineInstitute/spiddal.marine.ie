@@ -8,7 +8,7 @@
   <meta name="dcterms.date" content="2015-09-28">
   <title>Galway Bay Cable Observatory Data Files | Marine Institute</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="../gallery/css/spiddalGallery.css">
+  <link rel="stylesheet" href="../html/gallery/css/spiddalGallery.css">
   <style>
 	h2,
 	.links {
@@ -86,10 +86,10 @@
 <body>
 <div class="container header">
 
-        <img id="marineLogo" src="../gallery/img/Marine_logo.jpg" alt="Marine Institute" title="Marine Institute">
+        <img id="marineLogo" src="../html/gallery/img/Marine_logo.jpg" alt="Marine Institute" title="Marine Institute">
 
         <ul class="navigation">
-			<li><a class="nav" href="../gallery/index.html">Cable Observatory Home</a></li>
+			<li><a class="nav" href="../html/gallery/index.html">Cable Observatory Home</a></li>
             <li><a class="nav" href="http://spiddal.marine.ie">Cable Observatory Dashboard</a></li>
             <li><a class="nav" href="http://www.marine.ie/">Marine Institute Home</a></li>
         </ul>
@@ -119,6 +119,7 @@
 				<li><a href="#fluorometer">Fluorometer</a></li>
 				<li><a href="#adcp">Acoustic Doppler Current Profiler</a></li>
 				<li><a href="#hydrophone">Hydrophone</a></li>
+				<li><a href="#acousticTelemetry">Acoustic Telemetry</a></li>
 			</ol>
 		</li>
 	</ol>
@@ -141,7 +142,7 @@
 	<span about="http://spiddal.marine.ie/ctd" typeOf="sc:Dataset">
 		<h3 id="conductivity-temperature-depth-sensor">Conductivity Temperature Depth sensor</h3>
 		
-		<p>An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
+		<p>An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369" target="_blank">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/" target="_blank">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
 		<p>The data files produced by the CTD are available <span property="sc:distribution" href="http://spiddal.marine.ie/ctdDownload"><span about="http://spiddal.marine.ie/ctdDownload" typeOf="sc:DataDownload"><a property="sc:contentURL" href="http://spiddal.marine.ie/data/ctds/I-OCEAN7-304-XXXX/">here</a></span><span>. The data files contain the following columns:</p>
 		<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
 		<ul>
@@ -154,7 +155,7 @@
 					<li>hh is the hour within the day</li>
 					<li>mm is the minute within the hour</li>
 					<li>ss.sss is the second.milliseconds within the minute</li>
-					<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+					<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time" target="_blank">UTC</a>)</li>
 				</ul>
 			</li>
 			<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
@@ -197,7 +198,61 @@
 	<p>Data are collected in RDI's PD0 binary format, and made available to access <a href="http://spiddal.marine.ie/data/adcps/TRDI-WHB600Hz-1323/">here</a>. A brief description of PD0 format can be found <a href="http://www.rdinstruments.com/nav_faq.aspx#etwo">here</a> and tools are available for <a href="https://code.google.com/p/imos-toolbox/wiki/RDI">Python</a>, <a href="https://cran.r-project.org/web/packages/oce/oce.pdf">R</a> and various other languages to read the PD0 files.</p>
 	<p>During the current day, files are available for each minute of observation. Each night, these are concatenated to produce a daya file, and a single file is produced at the end of each month for that month's observations.</p>
 	<h3 id="hydrophone">Hydrophone</h3>
-	<p>An <a href="http://oceansonics.com/">OceanSonics</a><a href="">icListen</a> hydrophone is deployed on the observatory infrastructiure to monitor ocean noise in the region of the observatory. The wave form data collected by the hydrophone is processed to a summary file by a Fast Fourier Transform. These summary files are available <a href="http://spiddal.marine.ie/data/hydrophones/SBF1323/">here</a>. Each summary file contains: </p>
+	<p>An <a href="http://oceansonics.com/">OceanSonics</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0942/">icListen</a> hydrophone is deployed on the observatory infrastructiure to monitor ocean noise in the region of the observatory. The wave form data collected by the hydrophone is processed to a summary file by a Fast Fourier Transform. These summary files are available <a href="http://spiddal.marine.ie/data/hydrophones/SBF1323/">here</a>. The format of the summary files is described in this <a href="http://spiddal.marine.ie/data/pdf/iclisten_log_file_formats.pdf">file</a>.</p>
+	<h3 id="acousticTelemetry">Acoustic Telemetry</h3>
+	<p>In order to receive signals from tagged fish and other sea life, a <a href="http://vemco.com/">Vemco</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0949/">VR2C</a> acoustic monitoring receiver is deployed. The receiver records the passing of acoustic tags and the identifier of the tags it records. The data are recorded to text files, with the following two formats. For summary data, the following columns are recorded:</p>
+	<p><code>2015-11-30T10:52:02.314Z|VMVR2C450117| {comma separated data columns}</code></p>
+	<ul>
+		<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
+			<ul>
+				<li>YYYY is the year</li>
+				<li>MM is the month number within the year (e.g. 03 for March)</li>
+				<li>DD is the day number within the month</li>
+				<li>T delimits between the date and time</li>
+				<li>hh is the hour within the day</li>
+				<li>mm is the minute within the hour</li>
+				<li>ss.sss is the second.milliseconds within the minute</li>
+				<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+			</ul>
+		</li>
+		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
+		<li>Instrument serial number</li>
+		<li>Three-digit line counter (000-999)</li>
+		<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
+		<li>STS is a string indicating the instrument is operating in real-time mode</li>
+		<li>DC=X gives the number of tags detected since the instrument was deployed</li>
+		<li>PC=X gives the number of acoustic pings made since the instrument was deployed</li>
+		<li>LV=X.X is the line voltage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
+		<li>BV=X.X is the battery voltage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
+		<li>BU=X.X is the battery usage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>I=X.X is the current impedance in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UMAM/">milliamps</a></li>
+		<li>T=X.X is the internal receiver temperature in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
+		<li>DU=X.X give the detection memory used in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>RU=X.X is the raw memory used in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>XYZ=X.XX:Y.YY:Z.ZZ is the tilt information in Gs (1.00:0.00:0.00 indicates a perfectly vertical mounting with the hydrophone pointing upwards)</li>
+	</ul>
+	<p>For a detection event, the line output becomes:</p>
+	<ul>
+		<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
+			<ul>
+				<li>YYYY is the year</li>
+				<li>MM is the month number within the year (e.g. 03 for March)</li>
+				<li>DD is the day number within the month</li>
+				<li>T delimits between the date and time</li>
+				<li>hh is the hour within the day</li>
+				<li>mm is the minute within the hour</li>
+				<li>ss.sss is the second.milliseconds within the minute</li>
+				<li>Z indicates the GPS timestamp is in Co-ordinated Universal Time (<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>)</li>
+			</ul>
+		</li>
+		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
+		<li>Instrument serial number</li>
+		<li>Three-digit line counter (000-999)</li>
+		<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
+		<li>Fish tag model</li>
+		<li>Fish tag id</li>
+		<li><b><i>Optional output field, dependent on fish tag model:</i></b> A2D counts</li>
+	</ul>
 </div>
 <div class="footer">
 
