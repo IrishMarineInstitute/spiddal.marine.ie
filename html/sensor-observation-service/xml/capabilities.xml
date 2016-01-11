@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:Capabilities 
+  xmlns:sos="http://www.opengis.net/sos/1.0" 
+  xmlns:ows="http://www.opengis.net/ows/1.1" 
+  xmlns:gml="http://www.opengis.net/gml" 
+  xmlns:om="http://www.opengis.net/om/1.0" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.opengis.net/sos/1.0 
+    http://schemas.opengis.net/sos/1.0.0/sosAll.xsd" version="1.0.0">
+	
+	<ows:ServiceIdentification>
+		<ows:Title>Marine Institute | Galway Bay Cable Observatory | Sensor Observation Service</ows:Title>
+		<ows:ServiceType codeSpace="http://opengeospatial.net">OGC:SOS</ows:ServiceType>
+		<ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+		<ows:Fees>NONE</ows:Fees>
+		<ows:AccessConstraints>NONE</ows:AccessConstraints>
+	</ows:ServiceIdentification>
+	
+	<ows:ServiceProvider>
+		<ows:ProviderName>
+			Marine Institute - Foras na Mara
+		</ows:ProviderName>
+		<ows:ProviderSite xlink:href="http://data.marine.ie" />
+		<ows:ServiceContact>
+			<ows:IndividualName>Marine Institute Data Management Team</ows:IndividualName>
+			<ows:ContactInfo>
+				<ows:Phone>
+					<ows:Voice>+35391387200</ows:Voice>
+				</ows:Phone>
+				<ows:Address>
+					<ows:DeliveryPoint>Rinville</ows:DeliveryPoint>
+					<ows:City>Oranmore</ows:City>
+					<ows:AdministrativeArea>Galway</ows:AdministrativeArea>
+					<ows:Country>Ireland</ows:Country>
+					<ows:ElectronicMailAddress>datarequests@marine.ie</ows:ElectronicMailAddress>
+				</ows:Address>
+			</ows:ContactInfo>
+		</ows:ServiceContact>
+	</ows:ServiceProvider>
+	
+	<ows:OperationsMetadata>
+		<ows:OperationName name="GetCapabilities">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://spiddal.marine.ie/SOS"/>
+				</ows:HTTP>
+			</ows:DCP>
+		</ows:OperationName>
+		
+		<ows:OperationName name="GetObservation">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://spiddal.marine.ie/SOS"/>
+				</ows:HTTP>
+			</ows:DCP>
+			<ows:Parameter name="offering">
+				<ows:AllowedValues>
+					<ows:Value>ie.marine.data:idronaut.oceanseven.304.XXXX</ows:Value>
+					<ows:Value>ie.marine.data:wetLabs.ecoflntu.3137</ows:Value>
+				</ows:AllowedValues>
+			</ows:Parameter>
+			<ows:Parameter name="responseFormat">
+				<ows:AllowedValues>
+					<ows:Value>application/json</ows:Value>
+				</ows:AllowedValues>
+			</ows:Parameter>
+			<ows:Parameter name="observedProperty">
+				<ows:AllowedValues>
+					<ows:Value>uk.ac.nerc.vocab:P07:CFSN0330</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:CNDCST01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:CPHLPR01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:FCNTRW01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:NVLTOBS1</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:PSALCU01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:SVELCV01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:TEMPPR01</ows:Value>
+					<ows:Value>uk.ac.nerc.vocab:P01:TURBXXXX</ows:Value>
+				</ows:AllowedValues>
+			</ows:Parameter>
+			<ows:Parameter name="timeZone">
+				<ows:AllowedValues>
+					<ows:Value>UTC</ows:Value>
+				</ows:AllowedValues>
+			</ows:Parameter>
+		</ows:OperationName>
+		
+		<ows:OperationName name="DescribeSensor">
+			<ows:DCP>
+				<ows:HTTP>
+					<ows:Get xlink:href="http://spiddal.marine.ie/SOS"/>
+				</ows:HTTP>
+			</ows:DCP>
+			<ows:Parameter name="responseFormat">
+				<ows:AllowedValues>
+					<ows:Value>text/xml</ows:Value>
+				</ows:AllowedValues>
+			</ows:Parameter>
+		</ows:OperationName>
+		
+		<ows:Parameter name="service">
+			<ows:AllowedValues>
+				<ows:Value>SOS</ows:Value>
+			</ows:AllowedValues>
+		</ows:Parameter>
+		<ows:Parameter name="version">
+			<ows:AllowedValues>
+				<ows:Value>1.0.0</ows:Value>
+			</ows:AllowedValues>
+		</ows:Parameter>
+	</ows:OperationsMetadata>
+	
+	<sos:Contents>
+		<sos:ObservationOfferingList>
+		</sos:ObservationOfferingList>
+	</sos:Contents>
+	
+</sos:Capabilities>
