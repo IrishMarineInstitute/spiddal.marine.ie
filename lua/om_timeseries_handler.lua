@@ -1,8 +1,3 @@
-local cassandra = require "cassandra"
-local cassandra_session = cassandra.new()
-cassandra_session:set_timeout(5000) -- 5 second timeout
-local connected, err = cassandra_session:connect("172.17.1.89",9042);
-cassandra_session:set_keyspace("das")
 
 local helper = require("om_timeseries_helper")
 local omts = require("om_offering_config")
@@ -31,6 +26,11 @@ if observedProperty == nil then
      ngx.exit(404)
 end
 
+local cassandra = require "cassandra"
+local cassandra_session = cassandra.new()
+cassandra_session:set_timeout(5000) -- 5 second timeout
+local connected, err = cassandra_session:connect("172.17.1.89",9042);
+cassandra_session:set_keyspace("das")
 local now = helper:now()
 local an_hour_ago = now - (60*60*1000)
 
@@ -59,6 +59,6 @@ if rows then
   end
 end
 
+cassandra_session:close()
 helper:say_json_bottom(starttime,endtime)
-cassandra_session:set_keepalive(5000, 2)
---ecassandra_session:close()
+--cassandra_session:set_keepalive(5000, 2)

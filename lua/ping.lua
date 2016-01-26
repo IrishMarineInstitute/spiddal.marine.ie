@@ -45,6 +45,7 @@ else
   c:setopt(curl.OPT_FOLLOWLOCATION, 1)
   c:setopt(curl.OPT_FORBID_REUSE, 1)
   c:perform()
+  curl.easy_init(c)
 end
 ngx.header["Content-Type"] = "text/plain"
 ngx.header["Access-Control-Allow-Origin"] = "*"

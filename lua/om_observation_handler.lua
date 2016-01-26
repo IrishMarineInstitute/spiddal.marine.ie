@@ -1,9 +1,3 @@
-local cassandra = require "cassandra"
-local cassandra_session = cassandra.new()
-cassandra_session:set_timeout(5000) -- 5 second timeout
-local connected, err = cassandra_session:connect("172.17.1.89",9042);
-cassandra_session:set_keyspace("das")
-
 local omts = require("om_offering_config")
 
 ngx.header["Content-Type"] = "text/plain"
@@ -19,6 +13,13 @@ if not omts:hasOffering(ngx.var.arg_OFFERING) then
 end
 local offering = omts:offering(ngx.var.arg_OFFERING)
 local query = offering["cassandra"]["cql_latest"]
+
+local cassandra = require "cassandra"
+local cassandra_session = cassandra.new()
+cassandra_session:set_timeout(5000) -- 5 second timeout
+local connected, err = cassandra_session:connect("172.17.1.89",9042);
+cassandra_session:set_keyspace("das")
+
 
 local rows, err = cassandra_session:execute(query) 
 if err then
@@ -52,6 +53,7 @@ for k,property in pairs(offering["properties"]) do
     measurement['observedProperty']['href'] = property.observedProperty
     table.insert(om['member'],measurement)
 end
+cassandra_session:close()
 
 local JSON = require('JSON')
 ngx.print(JSON:encode_pretty(om))
