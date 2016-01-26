@@ -32,8 +32,8 @@ local timestamp =  t .. "." .. s .. "Z"
 
 local om = {}
 om['id'] = offering['id'] .. string.gsub(timestamp,'[^0-9]','')
-om['foi'] = {}
-om['foi']['href'] = 'http://example.marine.ie/feature/galwayBayCableObservatory'
+om['featureOfInterest'] = {}
+om['featureOfInterest']['href'] = 'http://example.marine.ie/feature/galwayBayCableObservatory'
 om['phenomenonTime'] = {}
 om['phenomenonTime']['instant'] = timestamp
 om['member'] = {}
