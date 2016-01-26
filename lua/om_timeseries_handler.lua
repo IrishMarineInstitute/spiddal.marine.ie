@@ -5,7 +5,7 @@ local connected, err = cassandra_session:connect("172.17.1.89",9042);
 cassandra_session:set_keyspace("das")
 
 local helper = require("om_timeseries_helper")
-local omts = require("om_timeseries_config")
+local omts = require("om_offering_config")
 
 ngx.header["Content-Type"] = "text/plain"
 if ngx.var.arg_ACCEPTVERSIONS ~= nil and 

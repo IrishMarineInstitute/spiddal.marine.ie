@@ -1,7 +1,8 @@
 local config = {
  id = "http://data.marine.ie/ctd/Idronaut/3137/",
  cassandra = {
-   cql =  "select * from ctd where time > ? and time <= ? limit 5000 ALLOW FILTERING"
+   cql =  "select * from ctd where instrument_id='I-OCEAN7-304-XXXX' and time > ? and time <= ? limit 5000 ALLOW FILTERING",
+   cql_latest = "select * from ctd where instrument_id='I-OCEAN7-304-XXXX' order by time desc limit 1"
  },
  properties = {
   ["vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/"] = {

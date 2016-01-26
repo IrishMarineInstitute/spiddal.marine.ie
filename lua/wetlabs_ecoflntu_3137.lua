@@ -1,7 +1,9 @@
 local config = {
  id = "http://data.marine.ie/fluorometer/WetLabs-ECO-FLNTU/",
  cassandra = {
-   cql =  "select * from fluorometer where time > ? and time <= ? limit 5000 ALLOW FILTERING"
+   cql =  "select * from fluorometer where instrument_id='WL-ECO-FLNTU-3137' and time > ? and time <= ? limit 5000 ALLOW FILTERING",
+   cql_latest = "select * from fluorometer where instrument_id='WL-ECO-FLNTU-3137' order by time desc limit 1"
+   
  },
  properties = {
   ["vocab.nerc.ac.uk/collection/P01/current/FCNTRW01/"] = {
