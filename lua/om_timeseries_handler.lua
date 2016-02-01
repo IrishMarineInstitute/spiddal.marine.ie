@@ -40,7 +40,7 @@ local query = offering["cassandra"]["cql"]
 local query_params = {{type="timestamp", value=helper:makeTimeStamp(starttime)},
                       {type="timestamp", value=helper:makeTimeStamp(endtime)}}
 
-local rows, err = cassandra_session:execute(query, query_params, {page_size = 1000}) 
+local rows, err = cassandra_session:execute(query, query_params, {page_size = 2000}) 
 if err then
   ngx.say(err.message)
   ngx.exit(500)
@@ -51,7 +51,7 @@ if rows then
   starttime = result["start_time"] or starttime
   endtime = result["end_time"] or endtime
   while rows and rows.meta.has_more_pages do
-    rows, err = cassandra_session:execute(query, query_params, {paging_state = rows.meta.paging_state})
+    rows, err = cassandra_session:execute(query, query_params, {paging_state = rows.meta.paging_state, page_size = 2000})
     if rows then
       result = helper:say_json_point(rows,observedProperty,",")
       endtime = result["end_time"] or endtime
