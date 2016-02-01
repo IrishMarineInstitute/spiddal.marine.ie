@@ -70,8 +70,8 @@ local helpers = {
   "id":"]===]..offering.id..[===[",
   "type" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_DiscreteTimeSeriesObservation",
   "observedProperty": {"href":"]===]..property.observedProperty..[===["},
-  "procedure": {"href":"]===]..property.procedure..[===[http://www.opengis.net/def/waterml/2.0/processType/Sensor"},
-  "featureOfInterest": {"href":"http://data.marine.ie/fluorometer/WetLabs-ECO-FLNTU/"},
+  "procedure": {"href":"]===]..property.procedure..[===["},
+  "featureOfInterest": {"href":"http://example.marine.ie/feature/galwayBayCableObservatory"},
   "resultTime": "]===]..now..[===[",
   "result": {
     "metadata": {
