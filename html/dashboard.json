@@ -408,7 +408,7 @@
 			"name": "gwaveBuoy",
 			"type": "JSON",
 			"settings": {
-				"url": "http://erddap.marine.ie/erddap/tabledap/IWaveBNetwork.json?longitude,latitude,time,station_id,PeakPeriod,PeakDirection,UpcrossPeriod,SignificantWaveHeight,SeaTemperature&time>=2015-09-14T00:00:00Z&station_id=%22Galway%20Bay%20Wave%20Buoy%22&orderByMax(%22time%22)",
+				"url": "http://erddap.marine.ie/erddap/tabledap/IWaveBNetwork.json?longitude,latitude,time,station_id,PeakPeriod,PeakDirection,UpcrossPeriod,SignificantWaveHeight,SeaTemperature&time>=2015-09-14T00:00:00Z&station_id=%22Galway%20Bay%20Wave%20Buoy%22&orderByMax(%22time%22)&SignificantWaveHeight>0",
 				"use_thingproxy": true,
 				"refresh": 600,
 				"method": "GET"
