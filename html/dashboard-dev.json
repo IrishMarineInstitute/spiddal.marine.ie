@@ -60,13 +60,10 @@
 					}
 				},
 				{
-					"type": "sparkline",
+					"type": "html",
 					"settings": {
-						"title": "How many people are watching this?",
-						"value": [
-							"datasources[\"spidvid.cloudapp.net\"][\"connections\"]"
-						],
-						"legend": "Number of HTTP connections"
+						"html": "<script>(function(d, s, id) {\n  var js, fjs = d.getElementsByTagName(s)[0];\n  if (d.getElementById(id)) return;\n  js = d.createElement(s); js.id = id;\n  js.src = \"//spiddal.marine.ie/js/anispectrogram.js\";\n  fjs.parentNode.insertBefore(js, fjs);\n}(document, 'script', 'anispectrogram-jssdk'));</script>\n<div class=\"anispectrogram\" \n      data-width=\"300\"\n      data-height=\"100\" \n      data-update-location-hash=\"false\"\n      data-controls=\"false\"\n      data-drps=\"4\"\n      data-mqtt-start-delay=\"0\"\n      data-autostop=\"300\"></div>",
+						"height": 2
 					}
 				}
 			]
