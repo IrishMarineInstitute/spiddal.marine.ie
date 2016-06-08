@@ -44,3 +44,5 @@
 */1 * * * * sleep 30; /home/dmuser/sites/spiddal.marine.ie/bin/getsite.sh
 */1 * * * * sleep 40; /home/dmuser/sites/spiddal.marine.ie/bin/getsite.sh
 */1 * * * * sleep 50; /home/dmuser/sites/spiddal.marine.ie/bin/getsite.sh
+*/1 * * * * ln -sf $(ls -t /data/adcps/TRDI-WHB600Hz-1323/$(date '+\%Y/\%m/\%d')/*.pd0 | head -1) /data/adcps/TRDI-WHB600Hz-1323/latest.pd0 >/dev/null 2>&1
+*/1 * * * * ln -sf $(ls -t /data/hydrophones/SBF1323/$(date '+\%Y/\%m/\%d')/*.txt | head -1) /data/hydrophones/SBF1323/latest.txt >/dev/null 2>&1

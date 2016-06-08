@@ -2,6 +2,7 @@
 DATA_DIR="/home/dmuser/sites/spiddal.marine.ie/html/data"
 TAR_TYPES="hydrophones"
 CAT_TYPES="ctds fluorometers acoustic_telemetry adcps"
+MONTHLY_CAT_TYPES="adcps"
 hydrophones="SBF1323"
 ctds="I-OCEAN7-304-XXXX"
 fluorometers="WL-ECO-FLNTU-3137"
