@@ -28,3 +28,12 @@ Generating the Data Documentation page
 --------------------------------------
 
     pandoc -o html/data.html -t html5 -H header.html -A footer.html data.md
+
+Installing the sampler
+----------------------
+
+    mkdir -p ~/virtualenvs/
+    virtualenv ~/virtualenvs/kafkasample
+    ~/virtualenvs/kafkasample/bin/pip install -r kafkasample/requirements.txt
+    sudo cp kafkasample/etc_supervisor_conf.d_samplers.conf /etc/supervisor/conf.d/samplers.conf
+    sudo supervisorctl reload
