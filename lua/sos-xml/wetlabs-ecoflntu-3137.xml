@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sml:PhysicalComponent gml:id="http://data.marine.ie/instrument/wetlabs-ecoflntu-3137"
+xmlns:sml="http://www.opengis.net/sensorml/2.0"
+xmlns:swe="http://www.opengis.net/swe/2.0"
+xmlns:gml="http://www.opengis.net/gml/3.2"
+xmlns:gmd="http://www.isotc211.org/2005/gmd"
+xmlns:gco="http://www.isotc211.org/2005/gco"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorml/2.0/sensorML.xsd">
+	<gml:description>WetLabs EcoFLNTU 3137</gml:description>
+	<gml:identifier codeSpace="uid">http://data.marine.ie/instrument/wetlabs-ecoflntu-3137</gml:identifier>
+	
+	<sml:identification>
+        <sml:IdentifierList>
+            <sml:identifier>
+                <sml:Term definition="http://sensorml.com/ont/swe/property/SerialNumber">
+                    <sml:label>Serial Number</sml:label>
+                    <sml:value>3137</sml:value>
+                </sml:Term>                
+            </sml:identifier>
+        </sml:IdentifierList>
+    </sml:identification>
+	
+	<sml:typeOf xlink:title="urn:ie.marine.data:instrument:wetlabs.ecoflntu"
+        xlink:href="http://data.marine.ie/wetlabs-ecoflntu"/>
+	
+</sml:PhysicalComponent>
