@@ -6,7 +6,7 @@ MONTHLY_CAT_TYPES="adcps"
 hydrophones="SBF1323"
 ctds="I-OCEAN7-304-XXXX"
 fluorometers="WL-ECO-FLNTU-3137"
-acoustic_telemetry="VMVR2C450117"
+acoustic_telemetry="VMVR2C450218"
 adcps="TRDI-WHB600Hz-1323"
 # file extensions
 ext_hydrophones=.txt
