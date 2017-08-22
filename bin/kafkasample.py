@@ -15,7 +15,7 @@ sample_seconds = 60*60*24;
 topic_file =  '/data/{0}-sample.json'.format(topic_name)
 topic_file_tmp =  '/data/{0}-sample.json.tmp'.format(topic_name)
 pattern = re.compile("^\s*\d.*$")
-yesterday_timestamp = (datetime.utcnow() - timedelta(days=1)).isoformat()[:-7]
+yesterday_timestamp = (datetime.utcnow() - timedelta(days=2)).isoformat()[:-7]
 client = KafkaClient(hosts="kafka01:9092,kafka02:9092,kafka03:9092")
 topic = client.topics[topic_name];
 consumer = topic.get_simple_consumer()
