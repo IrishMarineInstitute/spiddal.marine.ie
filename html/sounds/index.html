@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Sounds from beneath Galway Bay</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+</head>
+<body class="container">
+<h1>Sounds from Beneath Galway Bay</h1>
+
+
+<canvas id="canvas" width="400" height="128" style="display: block; background-color: black ;"></canvas>
+<div><span id="time"></span> (UTC Time)</div>
+<div class='form-inline'>
+  <div class='form-group'>
+    <label class='control-label'>Volume</label>
+    <input style='max-width: 200px' type="range" min="0" max="100" value="25" id="volumeControl">
+  </div>
+</div>
+<p id="info" class='text-info'>Loading data.. this could take some time...</p>
+<div id="errors" class="text-danger"></div>
+
+<p>To find out more, visit <a
+        href="http://smartbay.marine.ie/">smartbay.marine.ie</a>.
+</p>
+
+<script type="text/javascript">
+	Date.prototype.hashformat = Date.prototype.hashformat || function(){
+		return this.toJSON().toString().substring(0,19);
+	}
+
+    // create the audio context (chrome only for now)
+    if (! window.AudioContext) {
+        if (! window.webkitAudioContext) {
+            alert('no audiocontext found');
+        }
+        window.AudioContext = window.webkitAudioContext;
+    }
+
+    var context = new AudioContext();
+    context.gainNode = context.createGain();
+    context.gainNode.gain.value = 2.5;
+    document.getElementById('volumeControl').addEventListener('input',
+      function(){
+        var fraction = parseInt(this.value) / parseInt(this.max);
+        context.gainNode.gain.value = fraction * 10.0;
+    });
+    context.gainNode.connect(context.destination);
+
+		var currentRecording = {url: null};
+		var nextRecording = null;
+    var sourceNode;
+    var analyser;
+    var javascriptNode;
+		var canvasWidth = 400;
+		var canvasHeight = 128;
+		var fftSize = 256;
+
+    // get the context from the canvas to draw on
+    var ctx = $("#canvas").get()[0].getContext("2d");
+
+    // create a temp canvas we use for copying
+    var tempCanvas = document.createElement("canvas"),
+        tempCtx = tempCanvas.getContext("2d");
+    tempCanvas.width=1;
+    tempCanvas.height=fftSize/2;
+
+    // used for color distribution
+    var hot = new chroma.scale(["#000000","#33cc33","#ffff00","#ff9933", "#cc3300"]).domain([0,1,20,40,80]);
+
+    // load the sound
+    setupAudioNodes();
+		loadNextRecording();
+
+
+		function loadNextRecording(){
+			if(nextRecording){
+				return;
+			}
+			var today = new Date().toISOString().slice(0,10).replace(/-/g,"/");
+			var base_url = "http://spiddal.marine.ie/data/audio/ICListenRecordings/"+today+"/";
+			$("#audio").attr("href",base_url);
+			$.get(base_url,function(data){
+				$tmp = $("<tmp>").append($(jQuery.parseHTML(data)));
+				var hrefs = [];
+				$tmp.find('a[href$=".wav"]').each(function(){hrefs.push(base_url+$(this).attr('href'));});
+				if(hrefs.length){
+					if(currentRecording.url){
+						var index=hrefs.findIndex(function(url) {
+  						return url > currentRecording.url;
+						});
+						if(index >=0){
+							try{
+								loadSound(hrefs[index]);
+							}catch(e){
+								console.log(e);
+								setTimeout(loadNextRecording, 2000);
+							}
+						}else{
+							setTimeout(loadNextRecording, 5000);
+						}
+					}else{
+						loadSound(hrefs[hrefs.length-(hrefs.length>1?2:1)]);
+					}
+				}else{
+					$("#errors").html("no wav files found");
+				}
+			})
+		}
+
+		function createSourceNode(){
+			// create a buffer source node
+			var node = context.createBufferSource();
+			node.connect(analyser);
+			//node.connect(context.destination);
+			node.connect(context.gainNode);
+			node.addEventListener('ended', function(e){
+				currentRecording.url = null;
+				if(nextRecording){
+					playSound(nextRecording.node, nextRecording.url, nextRecording.buffer);
+					nextRecording = null;
+				}else{
+					$("#info").html("all done");
+				}
+			}, false);
+			return node;
+		}
+    function setupAudioNodes() {
+
+        // setup a javascript node
+        javascriptNode = context.createScriptProcessor(fftSize, 1, 1);
+        // connect to destination, else it isn't called
+        javascriptNode.connect(context.destination);
+
+
+        // setup a analyzer
+        analyser = context.createAnalyser();
+        analyser.smoothingTimeConstant = 0;
+        analyser.fftSize = fftSize;
+        analyser.minDecibels = -120;
+        analyser.maxDecibels = -20;
+				analyser.connect(javascriptNode);
+
+    }
+
+    // load the specified sound
+    function loadSound(url) {
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        // When loaded decode the data
+        request.onload = function () {
+
+            // decode the data
+        	context.decodeAudioData(request.response, function (buffer) {
+                document.getElementById('errors').innerHTML = "";
+							node = createSourceNode();
+								if(sourceNode == null || currentRecording.url == null){
+									playSound(node,url,buffer);
+								}else{
+									nextRecording = {
+										node: node, url: url, buffer: buffer
+									}
+								}
+            }, onError);
+        }
+        request.send();
+    }
+
+		function parseTimeFromUrl(url){
+			var match = url.match(/^.*(\d{4})(\d{2})(\d{2}).(\d{2})(\d{2})(\d{2})Z{0,1}\.wav$/);
+			return new Date(""+match[1]+"-"+match[2]+"-"+ match[3]+"T"+match[4]+":"+match[5]+":"+match[6]+"Z");
+		}
+
+    function playSound(node,url,buffer) {
+			  // console.log("buffer.duration="+buffer.duration);
+				//$("#audio").attr("href",url);
+				$("#info").html("");
+				sourceNode = node;
+        sourceNode.buffer = buffer;
+        sourceNode.start(0);
+        sourceNode.loop = false;
+				currentRecording.url = url;
+				var date = parseTimeFromUrl(url);
+				currentRecording.date = date;
+				currentRecording.offset_start_time = date.getTime() - (context.currentTime*1000);
+				setTimeout(loadNextRecording,buffer.duration/2*1000);
+    }
+
+    // log if an error occurs
+    function onError(e) {
+        document.getElementById('info').innerHTML="";
+        var el = document.getElementById('errors');
+        el.innerHTML = "";
+        el.appendChild(document.createTextNode("Ooops: "+e));
+        console.log(e);
+    }
+    // when the javascript node is called
+    // we use information from the analyzer node
+    // to draw the volume
+    javascriptNode.onaudioprocess = function () {
+
+        // get the average for the first channel
+        var array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+
+        // draw the spectrogram
+        if (sourceNode && sourceNode.playbackState == sourceNode.PLAYING_STATE) {
+            drawSpectrogram(array);
+						var time = currentRecording.offset_start_time+(context.currentTime*1000);
+						if(currentRecording.date.getTime()<time+100){
+							currentRecording.date.setTime(time);
+							$("#time").html(currentRecording.date.hashformat());
+						}
+        }
+
+
+    }
+		var cbuff = new Array(canvasHeight);
+    function drawSpectrogram(array) {
+
+        var canvas = document.getElementById("canvas");
+				var al = array.length;
+				for(var i=0; i< al; i++){
+					var value = array[i];
+            tempCtx.fillStyle = hot(value).hex();
+            tempCtx.fillRect(0, al - i, 1, 1);
+        }
+				var imageData = ctx.getImageData(0,0,canvasWidth,canvasHeight);
+				ctx.putImageData(imageData,-1,0);
+
+        // set translate on the canvas
+        //ctx.translate(-1, 0);
+        // draw the copied image
+        ctx.drawImage(tempCanvas, 0, 0, 1, al, canvasWidth-1, 0, 1, canvasHeight);
+
+        // reset the transformation matrix
+        //ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+    }
+
+</script>
+
+</body>
+</html>
