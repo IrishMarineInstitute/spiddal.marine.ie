@@ -1,0 +1,9 @@
+argparse==1.2.1
+gevent==1.1.1
+greenlet==0.4.10
+kazoo==2.2.1
+pykafka==2.4.0
+python-dateutil==2.5.3
+six==1.10.0
+tabulate==0.7.5
+wsgiref==0.1.2
