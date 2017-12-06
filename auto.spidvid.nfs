@@ -1,3 +1,5 @@
 audio 172.17.1.16:/volume1/audio
 video 172.17.1.16:/volume1/video
 photo 172.17.1.16:/volume1/photo
+serialdata 172.17.1.16:/volume1/serialdata
+hydrophones 172.17.1.16:/volume1/hydrophone

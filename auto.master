@@ -26,4 +26,4 @@
 # precedence.
 #
 #+auto.master
-/opt/data/spidvid /etc/auto.nfs
+/opt/data/spidvid /etc/auto.spidvid.nfs
