@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+<style>
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.hidden {
+   visibility: hidden;
+   display: none
+}
+</style>
+
+    <script src="//mqtt.marine.ie/mqtt.js"></script>
+    <title>Spiddal NMS Status</title>
+  </head>
+  <body class="container">
+   <div id="errors" class="error"></div>
+   <p class="lead" id="status"></div>
+   <table class="table table-sm" id="spiddal-nms">
+    <tr>
+      <th>Science Port</th>
+      <th>Device</th>
+      <th></th>
+    </tr>
+   </table>
+   <form id="login" class="hidden">
+       <input class="username" placeholder="username">
+       <input class="password" type="password" placeholder="password">
+       <input class="btn btn-success" type="submit" value="Login">
+   </form>
+    <script>
+      document.getElementById("login").addEventListener('submit',function(e){
+             if (e.preventDefault) e.preventDefault();
+             var username = document.querySelector('.username').value;
+             var password = document.querySelector('.password').value;
+             document.getElementById("login").classList.add("hidden");
+             document.getElementById("errors").textContent = "";
+             doconnect(["spiddal-nms"],username,password);
+             return false;
+       });
+      var showlogin = function(){
+        var form = document.getElementById("login");
+        form.classList.remove("hidden");
+      }
+      var client;
+      var doconnect = function(topics,username,password){
+         if(client){
+            client.end(true);
+            client = null;
+         }
+         if(username){
+            client = mqtt.connect("wss://mqtt.marine.ie",{username: username, password: password});
+         }else{
+            client = mqtt.connect("wss://mqtt.marine.ie");
+         }
+         client.on("message", function(topic, payload) {
+           document.getElementById("errors").textContent = "";
+               var el = document.getElementById(topic);
+               if(!el){
+                 el = document.createElement('div');
+                 el.id = topic;
+                 document.body.appendChild(el);
+               }
+               if(topic == "spiddal-nms"){
+                 updateNmsStatus(payload);
+               }else{
+                 el.textContent = payload;
+               }
+          });
+         client.on('connect', function(err) {
+           document.getElementById("errors").textContent = "";
+           document.getElementById("status").textContent = "Waiting for data...";
+         });
+         client.on('error', function(err) {
+           document.getElementById("errors").textContent = err.toString();
+           showlogin();
+         });
+         for(var i=0;i<topics.length;i++){
+            client.subscribe(topics[i]);
+         }
+      }
+      showlogin();
+var requestStateChange = function(id,desiredState,description){
+    var yes = confirm("Request "+desiredState+" for "+description+"?");
+}
+var updateNmsStatus = function(data){
+    data = JSON.parse(data);
+    document.getElementById("status").textContent = "Last updated "+data.timestamp;
+    data.states.forEach(function(sciencePort){
+       var description = "Science Port "
+            + sciencePort.id + ": "+sciencePort.device;
+       var table = document.getElementById("spiddal-nms");
+       var tr = document.getElementById(sciencePort.id);
+       if(!tr){
+          tr = document.createElement('tr');
+          tr.id = sciencePort.id;
+          table.appendChild(tr);
+       }
+       while(tr.firstChild){
+        tr.removeChild(tr.firstChild);
+       }
+       tr.classList.add("alert");
+       tr.classList.remove("alert-success");
+       tr.classList.remove("alert-warning");
+       tr.classList.add(sciencePort.expected == sciencePort.state?"alert-success":"alert-danger");
+       var td = document.createElement('th');
+       td.textContent = sciencePort.id;
+       tr.appendChild(td);
+       td = document.createElement('td');
+       td.textContent = sciencePort.device;
+       tr.appendChild(td);
+       td = document.createElement('td');
+       var group = document.createElement('div');
+       group.classList.add("btn-group");
+       group.classList.add("btn-toggle");
+       var button = document.createElement('button');
+       var question = "Request ON state for "+description+"?";
+       button.setAttribute('type','button');
+       button.classList.add("btn");
+       button.classList.add("btn-sm");
+       button.textContent= "ON";
+       button.addEventListener("click",
+              requestStateChange.bind(group,sciencePort.id,"ON",description));
+       var OK = sciencePort.state == sciencePort.expected;
+       var cl = ("on" == sciencePort.state)? OK ? "btn-success" : "btn-danger": "btn-light";
+       button.classList.add(cl);
+       group.appendChild(button);
+       button = document.createElement('button');
+       button.setAttribute('type','button');
+       button.classList.add("btn");
+       button.classList.add("btn-sm");
+       button.textContent= "OFF";
+       button.addEventListener("click",
+              requestStateChange.bind(group,sciencePort.id,"OFF",description));
+       var cl = ("off" == sciencePort.state)? OK ? "btn-success" : "btn-danger": "btn-light";
+       button.classList.add(cl);
+       group.appendChild(button);
+       td.appendChild(group);
+       tr.appendChild(td);
+    });
+}
+    </script>
+  </body>
+</html>
