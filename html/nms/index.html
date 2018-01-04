@@ -1,13 +1,16 @@
 <!doctype html>
 <html>
   <head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+
 
 <style>
-.error {
-    color: #D8000C;
-    background-color: #FFBABA;
-}
 .hidden {
    visibility: hidden;
    display: none
@@ -18,13 +21,13 @@
     <title>Spiddal NMS Status</title>
   </head>
   <body class="container">
-   <div id="errors" class="error"></div>
+   <div id="errors" class="danger"></div>
    <p class="lead" id="status"></div>
    <table class="table table-sm" id="spiddal-nms">
     <tr>
       <th>Science Port</th>
       <th>Device</th>
-      <th></th>
+      <th><button class="btn btn-light btn-sm" id="editButton" title="Click to lock or unlock"><i id="editLock" class="fas fa-lock"></i></button></th>
     </tr>
    </table>
    <form id="login" class="hidden">
@@ -35,13 +38,16 @@
     <script>
       document.getElementById("login").addEventListener('submit',function(e){
              if (e.preventDefault) e.preventDefault();
+             connectOrReconnect();
+             return false;
+       });
+      var connectOrReconnect = function(){
              var username = document.querySelector('.username').value;
              var password = document.querySelector('.password').value;
              document.getElementById("login").classList.add("hidden");
              document.getElementById("errors").textContent = "";
              doconnect(["spiddal-nms"],username,password);
-             return false;
-       });
+      };
       var showlogin = function(){
         var form = document.getElementById("login");
         form.classList.remove("hidden");
@@ -72,8 +78,12 @@
                }
           });
          client.on('connect', function(err) {
-           document.getElementById("errors").textContent = "";
-           document.getElementById("status").textContent = "Waiting for data...";
+           document.getElementById("errors").textContent = "Waiting for data...";
+           client.publish('spiddal-nms-configuration','{"command": "refresh"}');
+         });
+         client.on('close', function(e){
+           document.getElementById("errors").textContent = "Connection closed...";
+           connectOrReconnect();
          });
          client.on('error', function(err) {
            document.getElementById("errors").textContent = err.toString();
@@ -84,13 +94,23 @@
          }
       }
       showlogin();
+var showConfigModal = function(sciencePort) {
+  $("#configModalTitle").text("Science Port "+sciencePort.id);
+  $("#sciencePort").val(sciencePort.id);
+  $("#device").val(sciencePort.device);
+  $(".expected").prop('checked',false);
+  $("#expected"+sciencePort.expected).prop('checked',true);
+  $("#configModal").modal('show');
+}
 var requestStateChange = function(id,desiredState,description){
     var yes = confirm("Request "+desiredState+" for "+description+"?");
+    lockEdits();
 }
 var updateNmsStatus = function(data){
     data = JSON.parse(data);
     document.getElementById("status").textContent = "Last updated "+data.timestamp;
     data.states.forEach(function(sciencePort){
+       var locked = $("#editLock").hasClass("fa-lock");
        var description = "Science Port "
             + sciencePort.id + ": "+sciencePort.device;
        var table = document.getElementById("spiddal-nms");
@@ -105,21 +125,39 @@ var updateNmsStatus = function(data){
        }
        tr.classList.add("alert");
        tr.classList.remove("alert-success");
-       tr.classList.remove("alert-warning");
+       tr.classList.remove("alert-danger");
        tr.classList.add(sciencePort.expected == sciencePort.state?"alert-success":"alert-danger");
        var td = document.createElement('th');
        td.textContent = sciencePort.id;
        tr.appendChild(td);
        td = document.createElement('td');
        td.textContent = sciencePort.device;
+       var button = document.createElement('button');
+       button.classList.add('editable');
+       button.classList.add('btn');
+       button.classList.add('btn-light');
+       if(locked){
+          button.classList.add('hidden');
+       }
+       button.addEventListener("click",
+              showConfigModal.bind(null,sciencePort));
+       var icon = document.createElement('i');
+       icon.classList.add('fas');
+       icon.classList.add('fa-pencil-alt');
+       button.appendChild(icon);
+       td.insertBefore(button,td.firstChild);
        tr.appendChild(td);
        td = document.createElement('td');
        var group = document.createElement('div');
        group.classList.add("btn-group");
        group.classList.add("btn-toggle");
-       var button = document.createElement('button');
+       button = document.createElement('button');
+       if(locked){
+         button.setAttribute('disabled','');
+       }
        var question = "Request ON state for "+description+"?";
        button.setAttribute('type','button');
+       button.classList.add("lockable");
        button.classList.add("btn");
        button.classList.add("btn-sm");
        button.textContent= "ON";
@@ -130,7 +168,11 @@ var updateNmsStatus = function(data){
        button.classList.add(cl);
        group.appendChild(button);
        button = document.createElement('button');
+       if(locked){
+         button.setAttribute('disabled','');
+       }
        button.setAttribute('type','button');
+       button.classList.add("lockable");
        button.classList.add("btn");
        button.classList.add("btn-sm");
        button.textContent= "OFF";
@@ -144,5 +186,77 @@ var updateNmsStatus = function(data){
     });
 }
     </script>
+<script>
+  var lockEdits = function(){
+       $("#editLock").removeClass("fa-unlock").addClass("fa-lock");
+       $(".editable").addClass("hidden");
+       $(".lockable").prop('disabled',true);
+  }
+  $(document).ready(function(){
+     $("#editButton").click(function(){
+       if($("#editLock").hasClass("fa-lock")){
+         $("#editLock").removeClass("fa-lock").addClass("fa-unlock");
+         $(".editable").removeClass("hidden");
+         $(".lockable").prop('disabled',false);
+       }else{
+         lockEdits();
+       }
+     });
+     $("#configModal").on('shown.bs.modal', function(){
+          $("#device").focus();
+      });
+     $('#configModal').on('hidden.bs.modal', lockEdits);
+     $('#saveConfigChanges').click(function(){
+         var msg = {
+             command: "setConfiguration",
+             device: $("#device").val(),
+             id: $("#sciencePort").val(),
+             expected: $("input[name='expected']:checked").val()
+          };
+          client.publish('spiddal-nms-configuration',JSON.stringify(msg));
+          $("#configModal").modal("hide");
+     });
+  });
+</script>
+<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="configModalTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="sciencePort" value="" />
+        <div class="form-group">
+          <label for="device" id="deviceLabel">Connected Device</label>
+          <input type="text" class="form-control" id="device" aria-describedby="deviceHelp" placeholder="What device?">
+          <small id="deviceHelp" class="form-text text-muted">Label is used for display purposes only.</small>
+        </div>
+        <div class="form-group">
+          <label>Expected State</label>
+         <div class="form-check">
+          <input class="form-check-input expected" type="radio" id="expectedon" name="expected" value="on" checked>
+          <label class="form-check-label" for="expectedon">
+            ON
+          </label>
+         </div>
+         <div class="form-check">
+          <input class="form-check-input expected" type="radio" name="expected" id="expectedoff" value="off">
+          <label class="form-check-label" for="expectedoff">
+          OFF
+          </label>
+      
+         </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveConfigChanges">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   </body>
 </html>
