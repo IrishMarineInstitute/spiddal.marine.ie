@@ -2,6 +2,12 @@
 <html>
   <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script>
+    if (window.location.protocol == "http:") {
+      console.log("Reloading the page to a Secure Connection...")
+      window.location = document.URL.replace("http://", "https://");
+    }
+</script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -105,6 +111,14 @@ var showConfigModal = function(sciencePort) {
 var requestStateChange = function(id,desiredState,description){
     var yes = confirm("Request "+desiredState+" for "+description+"?");
     lockEdits();
+    if(yes){
+       var msg = {
+           command: "setState",
+           id: ""+id,
+           desiredState: desiredState
+        };
+        client.publish('spiddal-nms-configuration',JSON.stringify(msg));
+    }
 }
 var updateNmsStatus = function(data){
     data = JSON.parse(data);
