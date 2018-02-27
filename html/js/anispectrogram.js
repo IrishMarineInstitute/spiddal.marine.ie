@@ -30,7 +30,7 @@ function Anispectrogram(id,options){
   this.foreground_color = options["foreground-color"] || "#FFFFFF";
   this.background_color = options["background-color"] || "#101214";
 
-  this.max_buffer = this.dprs*60*2;//max 2 minutes of preloaded data.
+  this.max_buffer = this.drps*60*2;//max 2 minutes of preloaded data.
   this.update_freq = 100;
   this.paused = false;
   this.idprefix = ""+this.id+"_";
@@ -38,9 +38,9 @@ function Anispectrogram(id,options){
   this.was_paused = false;
   this.embed();
   var that = this;
-  var autostop = options.autostop === undefined ? default_stop : isNaN(parseInt(options.autostop))?default_stop:parseInt(options.autostop);
-  if(autostop > 0){
-    setTimeout(function(){that.pause()},autostop*1000);
+  this.autostop = options.autostop === undefined ? default_stop : isNaN(parseInt(options.autostop))?default_stop:parseInt(options.autostop);
+  if(this.autostop > 0){
+    setTimeout(function(){if(that.autostop)that.pause()},that.autostop*1000);
   }
   if( this.mqtt_start_delay >= 0){
     setTimeout(function(){that.startmqtt();},this.mqtt_start_delay*1000)
@@ -108,6 +108,7 @@ function Anispectrogram(id,options){
 Anispectrogram.prototype.startmqtt = function(){
   var that = this;
   if(this.mqtt_enabled && typeof mqtt != 'undefined'){
+    this.autostop = false;
     this.mqttclient = mqtt.connect(this.mqtt_url);
     this.mqttclient.on('connect', function () {
       if(!this.paused){
@@ -119,7 +120,6 @@ Anispectrogram.prototype.startmqtt = function(){
         console.log("switching to live mqtt feed");
         that.live = true;
         that.was_paused = false;
-        that.drps = 4; // todo analyse payload
         that.hideControls(); // todo allow live to be turned off?
         that.updated_time = 0;
         that.fft_seq_no = 0;
@@ -320,7 +320,10 @@ Anispectrogram.prototype.getSelectedValue = function(elementId){
   this.resume();
 };
 Anispectrogram.prototype.spectrogram = function(){
-  if(this.data_rows.length == 0) return;
+  if(this.data_rows.length == 0){
+    //console.log("no data rows");
+    return;
+  }
   while(this.data_rows.length < this.width_rows){
     //backfill until some data loads
     var copy = JSON.parse(JSON.stringify(this.data_rows[0]));
@@ -333,12 +336,15 @@ Anispectrogram.prototype.spectrogram = function(){
   var dy = this.data_rows[0].data.length-2;
   var dx = this.width_rows;
   var first_seq_no = this.data_rows[0].seq_no;
-  var offset = this.start_seq_no - first_seq_no;
+  var offset = this.start_seq_no <= 0? 0 : this.start_seq_no - first_seq_no;
   if(offset >= this.data_rows.length){
+    //console.log("offset too big");
      return;
   }
-  var shift_lines = Math.min(Math.floor((now - this.updated_time)*this.drps/1000),Math.ceil(dx/5));
+  var time_interval = Math.min((now - this.updated_time),250);
+  var shift_lines = Math.min(Math.floor((time_interval)*this.drps/1000),Math.ceil(dx/5));
   if(shift_lines == 0){
+    //console.log("no shift lines");
     return;
   }
   if(offset < 0 || this.start_seq_no < first_seq_no){
@@ -403,7 +409,7 @@ Anispectrogram.prototype.spectrogram = function(){
       .call(yAxis)
       .call(that.removeZero);
 
-  this.drawImage(this.acontext,shift_lines,dx,dy,limit,color);
+  this.drawImage(this.acontext,shift_lines,dx,dy,limit,color,offset);
   this.updated_time = now;
   for(var i=0; i<offset && this.data_rows.length>this.max_buffer;i++){
      this.data_rows.shift();
@@ -414,7 +420,7 @@ Anispectrogram.prototype.removeZero = function(axis){
   axis.select('#'+this.idprefix+'xaxis').filter(function(d) { return !d; }).remove();
   axis.select('#'+this.idprefix+'yaxis').filter(function(d) { return !d; }).remove();
 };
-Anispectrogram.prototype.drawImage =function(context,shiftx,dx,dy,limit,color) {
+Anispectrogram.prototype.drawImage =function(context,shiftx,dx,dy,limit,color,offset) {
   var image = null, orig = null;
   var orig = null;
   if(shiftx<dx){
@@ -457,6 +463,7 @@ Anispectrogram.prototype.getFFTData = function(fetch_obj,t){
         }
     }
     var headers = null;
+    var ndata_rows = 0;
     for(var i=0;i<text.length;i++){
         var a = text[i].split(/\t/);
         if(i>0 && a.length < headers.length){
@@ -473,8 +480,18 @@ Anispectrogram.prototype.getFFTData = function(fetch_obj,t){
           headers = a;
         }else{
           this.data_rows.push({ seq_no: this.fft_seq_no++, row: i, headers: headers, data: a, url: fetch_obj.url, hash: fetch_obj.hash});
+          ndata_rows++;
         }
     }
+   if(fetch_obj.hash === 'live'){
+     if(this.live_time){
+       this.drps = (this.live_time - new Date().getTime())/ndata_rows;
+     }else{
+       this.drps = ndata_rows/60;
+     }
+     this.live_time = new Date().getTime();
+   }
+  //console.log("data_rows=",this.data_rows.length,"after",fetch_obj.url,"max_buffer=",this.max_buffer);
 };
 Anispectrogram.prototype.checkStatus = function (response) {
   if (response.status >= 200 && response.status < 300) {

@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import dateutil.parser
 from pykafka import KafkaClient
 from pykafka.cli.kafka_tools import fetch_offsets
+import os
 import re
 import shutil
 import json
@@ -53,4 +54,5 @@ for message in consumer:
         with open(topic_file_tmp, 'w') as outfile:
            json.dump({"data": wanted}, outfile)
         shutil.move(topic_file_tmp, topic_file)
+        os.chmod(topic_file,420)
            

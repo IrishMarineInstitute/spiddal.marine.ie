@@ -8,7 +8,7 @@ do
    ARCHIVE="${DATA_DIR}/$SITE/$DIR_DATE"
    mkdir -p $ARCHIVE
    JSON="${DATA_DIR}/${SITE}.json"
-   STATUS=$(http_proxy=10.0.5.55:80 curl -s ${SITE}/nginx_status)
+   STATUS=$(curl -s ${SITE}/nginx_status)
    echo "$STATUS"| python -c 'import json,sys,datetime; data=sys.stdin.read(); connections=int(data.split()[2]); print json.dumps({"timestamp": datetime.datetime.utcnow().isoformat()[:-3]+"Z", "connections": connections, "data": data})' > ${JSON}.new && mv ${JSON}.new $JSON && cat $JSON >> $ARCHIVE/$FNAME
    # echo $STATUS | grep Active | awk '{"TZ=0 date +%FT%TZ"| getline date; printf "{ \"timestamp\": \"%s\", \"connections\": %s, \"status\": \"%s\" }\n", date,$3,ENVIRON["JSON_STATUS"]}' > ${JSON}.new && mv ${JSON}.new $JSON && cat $JSON >> $ARCHIVE/$FNAME
 done
