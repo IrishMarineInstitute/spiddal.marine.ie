@@ -43,7 +43,7 @@ for message in consumer:
    if message is not None:
         (timestamp,source,data) = message.value.split('|',3)
         if(data.startswith("!AIVDM")):
-            new_file_path = "/data/ais/{0}/{1}/{0}-{2}.txt".format(source,timestamp[:4],timestamp[:10])
+            new_file_path = "/data/ais/{0}/{1}/{0}-{2}.txt".format(source,timestamp[:4],timestamp[:7])
             if new_file_path != file_path:
                if f_all:
                  f_all.close()
