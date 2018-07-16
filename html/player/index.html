@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>spiddal.marine.ie video player</title>
+<link rel="stylesheet" type="text/css" href="player.css" />
+		<link rel="stylesheet" type="text/css" href="jsCalendar.css">
+		<link rel="stylesheet" type="text/css" href="jsCalendar.clean.css">
+
+		<!-- jsCalendar -->
+		<script type="text/javascript" src="jsCalendar.js"></script>
+
+		<!--[if lt IE 9]>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+		<![endif]-->
+</head>
+<body>
+<div id='player'>
+<!--
+<video id="video" width="50%" height="50%" autoplay="true" muted="muted" controls>
+-->
+  <video id="video" autoplay="true" muted="muted" ></video>
+   <div id='my-calendar' class='player-calendar'></div>
+    <div id="time-select" style="display: none">
+      <input type="range" id="time-select-bar" title="time" min="0" max="100" value="0" step="1" style="display: none">
+     <div id="time-min" style="font-size: smaller; float: left"></div><div id="time-max" style="float: right; font-size: smaller"></div>
+    </div>
+   <div id='controls'>
+      <div id='caption'><span id='caption-date'></span><span id='caption-t'></span><span id='caption-time'></span><span id='caption-z'></span></div>
+      <input type="range" id="progress-bar" title="volume" min="0" max="100" value="0">
+			<button id='btnReplay' class='replay' title='replay' accesskey="R" onclick='replayVideo();'>Replay</button>	
+			<button id='btnPlayPause' class='play' title='play' accesskey="P" onclick='playPauseVideo();'>Play</button>
+      <button id='btnFullScreen' class='fullscreen' title='toggle full screen' accesskey="T" onclick='toggleFullScreen();'>[&nbsp;&nbsp;]</button>
+			<button id='speed' class='speed' title='playback speed' accesskey="" >Playback Speed</button>
+                 <select id='speed-selector' class='playback-speed' style='display: none'>
+                   <option value="10">10x</option>
+                   <option value="5">5x</option>
+                   <option value="3">3x</option>
+                   <option value="2">2x</option>
+                   <option value="1" selected>1x</option>
+                   <option value="0.5">0.5x</option>
+                 </select>
+			<button id='share' class='share' title='share' accesskey="">Share</button>
+			<button id='picture' class='picture' title='Download a still photo' accesskey="">Picture</button>
+	</div>
+       <div id="sharing" style="display: none">
+          <ytd-share-target-renderer class="style-scope ytd-third-party-share-target-section-renderer" role="option">
+    
+    <button id="twitter" class="social" title="Share video on Twitter">
+      <yt-icon class="icon-resize style-scope ytd-share-target-renderer"><svg viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet" focusable="false" class="style-scope yt-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope yt-icon">
+        <g fill="none" fill-rule="evenodd" class="style-scope yt-icon">
+          <path d="M28.486325 59.969298c-6.636404-.569063-11.56302-2.326956-16.321973-5.823932C4.443764 48.472116 0 39.646792 0 29.986934 0 15.11156 10.506778 2.798388 25.274412.36718c6.028107-.992411 12.703853.049265 18.28794 2.85363 13.576275 6.818095 19.7813 22.541053 14.64267 37.103159-3.527955 9.997705-12.789708 17.617785-23.391072 19.244938-2.085625.320112-5.065149.508645-6.327625.400391z" fill="#1DA1F2" fill-rule="nonzero" class="style-scope yt-icon"></path>
+          <path d="M45.089067 17.577067c-.929778.595555-3.064534 1.460977-4.117334 1.460977v.001778C39.7696 17.784 38.077156 17 36.200178 17c-3.645511 0-6.6016 2.956089-6.6016 6.600178 0 .50631.058666 1.000178.16711 1.473778h-.001066c-4.945066-.129778-10.353422-2.608356-13.609244-6.85049-2.001778 3.46489-.269511 7.3184 2.002133 8.72249-.7776.058666-2.209067-.0896-2.882844-.747023-.045156 2.299734 1.060622 5.346845 5.092622 6.452267-.776533.417778-2.151111.297956-2.7488.209067.209778 1.941333 2.928355 4.479289 5.901155 4.479289C22.46009 38.565156 18.4736 40.788089 14 40.080889 17.038222 41.929422 20.5792 43 24.327111 43c10.650667 0 18.921956-8.631822 18.4768-19.280356-.001778-.011733-.001778-.023466-.002844-.036266.001066-.027378.002844-.054756.002844-.0832 0-.033067-.002844-.064356-.003911-.096356.9696-.66311 2.270578-1.836089 3.2-3.37991-.539022.296888-2.156089.891377-3.6608 1.038932.965689-.521244 2.396444-2.228266 2.749867-3.585777" fill="#FFF" class="style-scope yt-icon"></path>
+        </g>
+      </g></svg>
+    
+    
+  </yt-icon>
+      <div id="title" class="style-scope ytd-share-target-renderer">Twitter</div>
+    </button>
+  </ytd-share-target-renderer>
+       </div>
+</div>
+<video id="next-video" style="display:none" width="50%" height="50%" muted="muted" >
+</video>
+<script>
+var default_video_urls = ["https://spiddal.marine.ie/data/video/aja-helo-1H000314/2018/04/03/aja-helo-1H000314_2018-04-03_0000.mp4", "https://spiddal.marine.ie/data/video/aja-helo-1H000314/2018/04/03/aja-helo-1H000314_2018-04-03_0000.mp4"];
+var video_urls = [];
+var video_start_time = 0;
+var paused = false, video_playback_rate = 1;
+
+var toISOString = function(date){
+  return date.toISOString().substring(0,19)+"Z";
+}
+var getVideoUrls = function(){
+  if(video_urls.length == 0){
+     return default_video_urls;
+  }
+  return video_urls;
+}
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response
+  } else {
+    var error = new Error(response.statusText)
+    error.response = response
+    throw error
+  }
+}
+var memoizedPromises = {};
+var  fetchVideoDaysInMonth = function(date){
+  var key = date.toISOString().substring(0,7);
+  if(memoizedPromises[key]){
+    return memoizedPromises[key];
+  }
+  var promise = new Promise(function(resolve,reject){
+   var url = getMonthUrlForDate(date);
+  fetch(url)
+    .then(checkStatus)
+    .then(function(response){
+      return response.text();
+  }).then(function(text){
+    var d = document.createElement("div");
+    d.innerHTML = text;
+    wanted = [];
+    var a = d.querySelectorAll('a');
+    for(var i=0;i<a.length;i++){
+      var href = a[i].getAttribute("href");
+      if(/\d\d\/$/.test(href)){
+        date.setDate(parseInt(href.substring(0,2)));
+        wanted.push(new Date(date));
+      }
+    }
+    resolve(wanted);
+  }).catch(function(error) {
+    reject(error);
+  });
+  });
+  memoizedPromises[key] = promise;
+  return promise
+}
+
+var getVideoUrlsForDate = function(date){
+  var promise = new Promise(function(resolve,reject){
+   var url = getIndexUrlForDate(date);
+  fetch(url)
+    .then(checkStatus)
+    .then(function(response){
+      return response.text();
+  }).then(function(text){
+    var d = document.createElement("div");
+    d.innerHTML = text;
+    wanted = [];
+    var a = d.querySelectorAll('a');
+    for(var i=0;i<a.length;i++){
+      var href = a[i].getAttribute("href");
+      if(href.endsWith(".mp4")){
+        wanted.push(url+href);
+      }
+    }
+    resolve(wanted);
+  }).catch(function(error) {
+    reject(error);
+  });
+  });
+  return promise;
+}
+var getVideoTimes = function(){
+  var times = [];
+  getVideoUrls().forEach(function(url){
+     var time = url.substring(url.length-8,url.length-4);
+     if(url.endsWith(".mp4") && /^[0-9]{4}$/.test(time)){
+       time = time.substring(0,2)+":"+time.substring(2)+":00";
+        times.push(time);
+     }
+  });
+  return times;
+}
+var base_url = "http://spiddal.marine.ie/data/video/aja-helo-1H000314/";
+var getIndexUrlForDate = function(date){
+  return base_url+date.toISOString().substring(0,10).replace(/-/g,"/")+"/";
+}
+var getMonthUrlForDate = function(date){
+  return base_url+date.toISOString().substring(0,7).replace(/-/g,"/")+"/";
+}
+var getVideoUrlAfter = function(url){
+  var urls = getVideoUrls();
+  if(urls.length == 0){
+   //TODO handle no videos
+   return "";
+  }
+  url = url && url.indexOf("#")>0? url.substring(0,url.indexOf("#")):url;
+  var index = url ? (urls.indexOf(url)+1): 0;
+  if(index < 0 || (index >=  urls.length)){
+    index = 0;
+  }
+  return urls[index];
+}
+var showVideoAfter = function(vurl,offset){
+   //todo fix autoplay
+   var video = document.getElementById("video");
+   offset = offset || 0;
+   url = getVideoUrlAfter(vurl);
+   document.getElementById("video-src").src = url + "#t="+offset;
+   video_start_time = offset;
+   //console.log(document.getElementById("video-src").src);
+   if(paused){
+     video.removeAttribute('autoplay');
+   }else{
+     video.setAttribute('autoplay',true);
+   }
+   //video.autoPlay = !paused;
+   video.load();
+   video.playbackRate = video_playback_rate;
+   url = getVideoUrlAfter(url);
+   document.getElementById("next-video-src").src = url;
+   var nextvideo = document.getElementById("next-video");
+   nextvideo.load();
+}
+var video = document.getElementById("video");
+video.onended = function(){
+  showVideoAfter(this.currentSrc);
+  this.play();
+}
+var getDateFromVideoUrl = function(url){
+  var match = url.match(/^.*_(2\d{3}-\d\d-\d\d)_(\d\d)(\d\d)\.mp4.*$/);
+  var s = match[1]+"T"+match[2]+":"+match[3]+":00Z";
+  return new Date(s);
+}
+video.onloadedmetadata = function(){
+  if(this.textTracks.length == 0){
+     var tt = this.addTextTrack("subtitles", "English", "en");
+     tt.oncuechange = function(){
+       var cue = this.activeCues[0];
+       if(cue && timeSelector.style.display == "none"){
+         document.getElementById('caption-date').innerText = cue.text.substring(0,10);
+         document.getElementById('caption-t').innerText = 'T';
+         document.getElementById('caption-time').innerText = cue.text.substring(11,19);
+         document.getElementById('caption-z').innerText = 'Z';
+         if(paused){
+             updateHash(null,false);
+         }
+       }
+     }
+  }
+  var track = this.textTracks[0];
+  while(track.cues.length){
+     track.removeCue(track.cues[0]);
+  }
+  track.mode = "showing";
+  var date = getDateFromVideoUrl(this.currentSrc);
+  var duration = Math.floor(this.duration);
+  for(var i=0;i<duration;i++){
+    var cue = toISOString(date);
+    if(window.VTTCue){
+      track.addCue(new VTTCue(i,i+0.99,cue));
+    }else{
+      track.addCue(new TextTrackCue(i,i+0.99,cue));
+    }
+    date = new Date(date.getTime()+1000);
+  }
+  this.textTracks[0].mode = isFullScreen()?"showing":"hidden";
+  this.currentTime = video_start_time;
+  video_start_time = 0;
+}
+var getDisplayDate = function(){
+      return new Date(document.getElementById('caption').innerText);
+}
+function yyyymmdd(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+var updateHashTimeout = null;
+var hideTimeSelectorTimeout = null;
+
+var updateHash = function(date,show){
+    date = date || getDisplayDate();
+    document.location.hash = date.toISOString().substring(0,19);
+    if(show!==false)  showVideoByDate(date);
+}
+var scheduleHideTimeSelector = function(){
+  clearTimeout(hideTimeSelectorTimeout);
+  hideTimeSelectorTimeout = setTimeout(hideTimeSelector,2500);
+}
+var selectTime = function(){
+  document.getElementById('caption-time').innerText = this.times[this.value];
+  clearTimeout(updateHashTimeout);
+  updateHashTimeout = setTimeout(updateHash,300);
+  scheduleHideTimeSelector();
+}
+var toggleShareVideo = function(){
+  if( document.getElementById('sharing').style.display == 'none'){
+    pauseVideo();
+    updateHash(getDisplayDate(),false);
+    document.getElementById('sharing').style.display = 'block';
+  }else{
+    document.getElementById('sharing').style.display = 'none';
+  }
+  
+}
+document.getElementById('share').addEventListener('click',toggleShareVideo);
+var takeAPicture = function(){
+  var wasPaused = paused;
+   pauseVideo();
+   var canvas, img;
+    canvas = document.createElement('canvas');
+    canvas.height = video.videoHeight;
+    canvas.width = video.videoWidth;
+    ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    //var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+    //window.location.href=image;
+    var lnk = document.createElement('a'), e;
+    lnk.download = "spiddal-"+(toISOString(getDisplayDate()).replace(/:/g,""))+".png";
+    lnk.href = canvas.toDataURL(); 
+    if (document.createEvent) {
+      e = document.createEvent("MouseEvents");
+      e.initMouseEvent("click", true, true, window,
+                         0, 0, 0, 0, 0, false, false, false,
+                         false, 0, null);
+      lnk.dispatchEvent(e);
+    } else if (lnk.fireEvent) {
+      lnk.fireEvent("onclick");
+    }
+  if(!wasPaused){
+    playVideo();
+  }
+}
+document.getElementById('picture').addEventListener('click',takeAPicture);
+var hideSpeed = function(){
+  var e = document.getElementById('speed-selector');
+  video_playback_rate = parseFloat(e.options[e.selectedIndex].value);
+  video.playbackRate = video_playback_rate;
+  document.getElementById('speed').style.display="inline";
+  e.style.display="none";
+}
+var openTwitterShare = function(){
+  var shareURL = "http://twitter.com/share?";
+  var params = {
+     text: "Galway Bay camera",
+     url: window.location.href,
+     via: "MarineInst",
+     hashtags: "underwater"
+  }
+  for(var prop in params) shareURL += '&' + prop + '=' + encodeURIComponent(params[prop]);
+   window.open(shareURL, '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+}
+
+document.getElementById('twitter').addEventListener('click',openTwitterShare);
+var showSpeed = function(){
+  document.getElementById('speed').style.display="none";
+  document.getElementById('speed-selector').style.display="inline";
+}
+document.getElementById('speed').addEventListener('click',showSpeed);
+document.getElementById('speed-selector').addEventListener('change',hideSpeed);
+document.getElementById('speed-selector').addEventListener('blur',hideSpeed);
+var timeSelector = document.getElementById("time-select-bar");
+timeSelector.addEventListener('input',selectTime);
+
+var hideTimeSelector = function(){
+   document.getElementById("time-select").style.display="none";
+   timeSelector.style.display = "none";
+}
+
+var toggleTimeSlider = function(){
+  if(timeSelector.style.display == "none"){
+    hideCalendar();
+    timeSelector.times = getVideoTimes();
+    timeSelector.max = timeSelector.times.length - 1;
+    var currentUrl = video.currentSrc.replace(/#.*$/,"");
+    document.getElementById("time-min").innerText = timeSelector.times[0].substring(0,5);
+    document.getElementById("time-max").innerText = timeSelector.times[timeSelector.max].substring(0,5);
+    var val = getVideoUrls().indexOf(currentUrl);
+    timeSelector.value = val>=0?val:0;
+    document.getElementById("time-select").style.display="block";
+    timeSelector.style.display = "block";
+    scheduleHideTimeSelector();
+  }else{
+    hideTimeSelector();
+  }
+};
+var hideCalendar = function(){
+    var element = document.getElementById("my-calendar");
+    element.className = "player-calendar";
+    element.innerHTML = "";
+}
+var selectVideoDays = function(calendar,date){
+  fetchVideoDaysInMonth(date).then(function(dates){
+      calendar.select(dates);
+  });
+}
+var toggleCalendar = function(){
+    var element = document.getElementById("my-calendar");
+    if(element.className.indexOf('jsCalendar')<0){
+      hideTimeSelector();
+      var date = getDisplayDate();
+      var calendar = jsCalendar.new(element, date,
+       {
+         monthFormat: "month YYYY"
+       });
+      selectVideoDays(calendar,date);
+      calendar.onDateClick(function(event,date){
+          if(calendar.isSelected(date)){
+            calendar.set(date);
+            toggleCalendar();
+            var cd = yyyymmdd(date);
+            document.getElementById('caption-date').innerText = cd;
+            var s =cd+'T'+document.getElementById('caption-time').innerText+'Z';
+            date = new Date(s);
+            updateHash(date,true);
+          }
+      });
+      calendar.onMonthChange(function(e,date){
+         date.setDate(2);
+         selectVideoDays(calendar,date);
+      });
+    }else{
+      hideCalendar();
+    }
+}
+document.getElementById('caption-date').addEventListener('click',toggleCalendar);
+document.getElementById('caption-time').addEventListener('click',toggleTimeSlider);
+
+var source = document.createElement("source");
+source.id = "video-src";
+source.setAttribute("type","video/mp4");
+var url = getVideoUrls()[0];
+source.setAttribute("src",url);
+video.appendChild(source);
+var nextsource = document.createElement("source");
+nextsource.id = "next-video-src";
+nextsource.setAttribute("type","video/mp4");
+url = getVideoUrls()[1];
+nextsource.setAttribute("src",url);
+document.getElementById("next-video").appendChild(nextsource);
+var showVideoByDate = function(wanted){
+     getVideoUrlsForDate(wanted).then(function(urls){
+        var datestring = toISOString(wanted);
+        var vurls = [];
+        var urldate = null;
+        var starturl = null;
+        for(var i=0;i<urls.length;i++){
+          var url = urls[i];
+          var datepart = url.substring(url.length-19,url.length-4);
+          var d = datepart.substring(0,10)+"T"+datepart.substring(11,13)+":"+datepart.substring(13,15)+":00Z";
+          if(d<=datestring){
+             urldate = new Date(d);
+             if(vurls.length){
+               starturl = vurls[vurls.length-1];
+             }
+          }
+          vurls.push(url);
+        }
+        var seconds = Math.floor((wanted - urldate)/1000);
+        video_urls = vurls;
+        showVideoAfter(starturl,seconds);
+     });
+}
+var showVideoByHash = function(force){
+  if(paused && !force){
+    return;
+  }
+  var hash = document.location.hash;
+  
+  if(hash.match(/(20[0-9][0-9])-[01][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]/)){
+   var datestring = hash.substring(1,17)+":00Z";
+   if(hash.match(/(20[0-9][0-9])-[01][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/)){
+     datestring = hash.substring(1,20)+"Z";
+   }
+   if(datestring == document.getElementById('caption').innerText && !force){
+     return;
+   }
+   var wanted = new Date(datestring);
+   if(!isNaN( wanted.getTime())){
+     showVideoByDate(wanted);
+   }
+  }else if(source.getAttribute("src") == null){
+       // page loaded without url
+        showVideoAfter(0);
+  }
+}
+//window.onhashchange = showVideoByHash;
+showVideoByHash();
+document.addEventListener("visibilitychange",function(evt){
+   pauseVideo();
+});
+
+// some code from https://codepen.io/blackjacques/pen/bgamaj
+// Get a handle to the player
+	var player       = document.getElementById('video');
+	var btnPlayPause = document.getElementById('btnPlayPause');
+	var btnMute      = document.getElementById('btnMute');
+	var progressBar  = document.getElementById('progress-bar');
+  var volumeBar    = document.getElementById('volume-bar');
+
+  // Update the video volumev
+  if(volumeBar) volumeBar.addEventListener("change", function(evt) {
+		player.volume = evt.target.value;
+	});
+  //document.getElementById('btnFullScreen').disabled = true;
+	// Add a listener for the timeupdate event so we can update the progress bar
+	player.addEventListener('timeupdate', updateProgressBar, false);
+	
+	// Add a listener for the play and pause events so the buttons state can be updated
+	player.addEventListener('play', function() {
+		// Change the button to be a pause button
+		changeButtonType(btnPlayPause, 'pause');
+	}, false);
+  
+	player.addEventListener('pause', function() {
+		// Change the button to be a play button
+		changeButtonType(btnPlayPause, 'play');
+	}, false);
+	
+	player.addEventListener('volumechange', function(e) { 
+		// Update the button to be mute/unmute
+		if (player.muted) changeButtonType(btnMute, 'unmute');
+		else changeButtonType(btnMute, 'mute');
+	}, false);	
+  
+  
+  progressBar.addEventListener("click", seek);
+
+  function seek(e) {
+      var percent = e.offsetX / this.offsetWidth;
+      player.currentTime = percent * player.duration;
+      //e.target.value = Math.floor(percent / 100);
+      //e.target.value = Math.floor(percent * 100);
+      //e.target.innerHTML = progressBar.value + '% played';
+  }
+  function playVideo() {
+  	// Change the button to a pause button
+  	changeButtonType(btnPlayPause, 'pause');
+  	player.play();
+        paused = false;
+  }
+  function pauseVideo() {
+      // Change the button to a play button
+  	changeButtonType(btnPlayPause, 'play');
+  	player.pause();
+        paused = true;
+  }
+
+  function playPauseVideo() {
+  	if (paused || player.paused || player.ended) {
+           playVideo();
+  	}
+  	else {
+           pauseVideo();
+  	}
+  }
+  
+  // Stop the current media from playing, and return it to the start position
+  function stopVideo() {
+  	pauseVideo();
+  	if (player.currentTime) player.currentTime = 0;
+  }
+  
+  // Toggles the media player's mute and unmute status
+  function muteVolume() {
+  	if (player.muted) {
+  		// Change the button to a mute button
+  		changeButtonType(btnMute, 'mute');
+  		player.muted = false;
+  	}
+  	else {
+  		// Change the button to an unmute button
+  		changeButtonType(btnMute, 'unmute');
+  		player.muted = true;
+  	}
+  }
+  
+  // Replays the media currently loaded in the player
+  function replayVideo() {
+  	resetPlayer();
+  	playVideo();
+  }
+  
+  // Update the progress bar
+  function updateProgressBar() {
+  	// Work out how much of the media has played via the duration and currentTime parameters
+  	var percentage = Math.floor((100 / player.duration) * player.currentTime);
+        if(isNaN(percentage)){
+          return;
+        }
+  	// Update the progress bar's value
+  	progressBar.value = percentage;
+  	// Update the progress bar's text (for browsers that don't support the progress element)
+  	progressBar.innerHTML = percentage + '% played';
+  }
+  
+  // Updates a button's title, innerHTML and CSS class
+  function changeButtonType(btn, value) {
+  	btn.title     = value;
+  	btn.innerHTML = value;
+  	btn.className = value;
+  }
+  
+  function resetPlayer() {
+  	progressBar.value = 0;
+  	// Move the media back to the start
+  	player.currentTime = 0;
+  	// Set the play/pause button to 'play'
+  	changeButtonType(btnPlayPause, 'play');
+  }  
+  
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+  }
+ function isFullScreen(){
+  return document.fullscreenElement ||
+	document.webkitFullscreenElement ||
+	document.mozFullScreenElement ||
+	document.msFullscreenElement;
+ }
+ function onFullScreenChange() {
+    video.textTracks[0].mode = isFullScreen()?"showing":"hidden";
+ }
+document.addEventListener("fullscreenchange", onFullScreenChange);
+document.addEventListener("webkitfullscreenchange", onFullScreenChange);
+document.addEventListener("mozfullscreenchange", onFullScreenChange);
+document.addEventListener("MSFullscreenChange", onFullScreenChange);
+  
+  function toggleFullScreen() {
+    if(isFullScreen()){
+       if(document.cancelFullScreen)
+           document.cancelFullScreen();
+       else if(document.msExitFullscreen)
+            document.msExitFullscreen();
+       else if(document.mozCancelFullScreen)
+            document.mozCancelFullScreen();
+       else if(document.webkitCancelFullScreen)
+            document.webkitCancelFullScreen();
+       else alert("Fullscreen API is not supported");
+    }else{
+       if(player.requestFullscreen)
+           player.requestFullscreen()
+       else if(player.msRequestFullscreen)
+           player.msRequestFullscreen();
+       else if(player.mozRequestFullScreen)
+           player.mozRequestFullScreen();
+       else if(player.webkitRequestFullscreen)
+           player.webkitRequestFullscreen();
+       else alert("Fullscreen API is not supported");
+    }
+  }
+</script>
+</body>
+</html>
