@@ -115,7 +115,8 @@ var requestStateChange = function(id,desiredState,description){
        var msg = {
            command: "setState",
            id: ""+id,
-           desiredState: desiredState
+           desiredState: desiredState,
+           timestamp: new Date()
         };
         client.publish('spiddal-nms-configuration',JSON.stringify(msg));
     }
