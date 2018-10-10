@@ -133,7 +133,7 @@ var getVideoUrlsForDate = function(date){
     var a = d.querySelectorAll('a');
     for(var i=0;i<a.length;i++){
       var href = a[i].getAttribute("href");
-      if(href.endsWith(".mp4")){
+      if(href.endsWith(".mp4") && /\d{4}-\d{2}-\d{2}_\d{4}.mp4$/.test(href)){
         wanted.push(url+href);
       }
     }
