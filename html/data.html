@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="sc: http://schema.org/">
+<html prefix="sc: //schema.org/">
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
@@ -8,7 +8,7 @@
   <meta name="dcterms.date" content="2015-09-28">
   <title>Galway Bay Cable Observatory Data Files | Marine Institute</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="../gallery/css/spiddalGallery.css">
+  <link rel="stylesheet" href="/css/spiddalGallery.css">
   <style>
 	h2,
 	.links {
@@ -77,11 +77,11 @@
 	}
   </style>
   <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
       <link rel="icon" href="favicon.ico" />
-	<script type="text/javascript" src="http://www.marine.ie/Home/sites/all/modules/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2"></script>
-	<script type="text/javascript" src="http://www.marine.ie/Home/misc/drupal.js?nw99bx"></script>
+	<script type="text/javascript" src="//www.marine.ie/Home/sites/all/modules/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2"></script>
+	<script type="text/javascript" src="//www.marine.ie/Home/misc/drupal.js?nw99bx"></script>
 </head>
 <body>
 <div class="container header">
@@ -89,22 +89,22 @@
         <img id="marineLogo" src="../gallery/img/Marine_logo.jpg" alt="Marine Institute" title="Marine Institute">
 
         <ul class="navigation">
-			<li><a class="nav" href="../gallery/index.html">Cable Observatory Home</a></li>
-            <li><a class="nav" href="http://spiddal.marine.ie">Cable Observatory Dashboard</a></li>
-            <li><a class="nav" href="http://www.marine.ie/">Marine Institute Home</a></li>
+			<li><a class="nav" href="/">Cable Observatory Home</a></li>
+            <li><a class="nav" href="//spiddal.marine.ie">Cable Observatory Dashboard</a></li>
+            <li><a class="nav" href="//www.marine.ie/">Marine Institute Home</a></li>
         </ul>
 
     </div>
-<div class="container" about="http://spiddal.marine.ie/data" typeOf="sc:DataCatalog">
+<div class="container" about="//spiddal.marine.ie/data" typeOf="sc:DataCatalog">
 
 	<span property="sc:name" content="Galway Bay Cable Observatory Data Files"></span>
-	<span property="sc:url" href="http://spiddal.marine.ie/data.html"></span>
-	<span property="sc:creator" href="http://www.marine.ie"></span>
-	<span property="sc:publisher" href="http://www.marine.ie"></span>
-	<span property="sc:dataset" href="http://spiddal.marine.ie/ctd"></span>
-	<span property="sc:dataset" href="http://spiddal.marine.ie/adcp"></span>
-	<span property="sc:dataset" href="http://spiddal.marine.ie/fluorometer"></span>
-	<span property="sc:dataset" href="http://spiddal.marine.ie/hydrophone"></span>
+	<span property="sc:url" href="//spiddal.marine.ie/data.html"></span>
+	<span property="sc:creator" href="//www.marine.ie"></span>
+	<span property="sc:publisher" href="//www.marine.ie"></span>
+	<span property="sc:dataset" href="//spiddal.marine.ie/ctd"></span>
+	<span property="sc:dataset" href="//spiddal.marine.ie/adcp"></span>
+	<span property="sc:dataset" href="//spiddal.marine.ie/fluorometer"></span>
+	<span property="sc:dataset" href="//spiddal.marine.ie/hydrophone"></span>
 	
 	<header>
 		<h1 class="title">Galway Bay Cable Observatory Data Files</h1>
@@ -139,11 +139,11 @@
 					|- 02</code></pre>
 	<p>During the day, data files are streamed from the sensors to these directories. At the end of the day an archive file is created containing the full set of data produced during the day. For line oriented data, a single .txt file containing the concatenated results is created. For file oriented data, both a .zip and a .tar.gz compressed archive of the day's files is created in the folder. Once the daily archive has been produced, the individual files may be removed. After the end of a month, a .zip and a .tar.gz archive for the full month is also created for ease of data delivery.</p>
 	<h2 id="instruments">Instruments</h2>
-	<span about="http://spiddal.marine.ie/ctd" typeOf="sc:Dataset">
+	<span about="//spiddal.marine.ie/ctd" typeOf="sc:Dataset">
 		<h3 id="conductivity-temperature-depth-sensor">Conductivity Temperature Depth sensor</h3>
 		
-		<p>An <a href="http://www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369" target="_blank">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/" target="_blank">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
-		<p>The data files produced by the CTD are available <span property="sc:distribution" href="http://spiddal.marine.ie/ctdDownload"><span about="http://spiddal.marine.ie/ctdDownload" typeOf="sc:DataDownload"><a property="sc:contentURL" href="http://spiddal.marine.ie/data/ctds/">here</a></span><span>. The data files contain the following columns:</p>
+		<p>An <a href="//www.idronaut.it/cms/view/products/multiparameter-ctds/oceanographic-ctds/ocean-seven-304iplusi/s369" target="_blank">Idronaut Ocean-Seven</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0861/" target="_blank">304</a> Conductivity-Temperature-Depth probe is installed on the observatory infrastructure. It measures the temperature and conductivity of the seawater (the conductivity is used to calculate an estimate of the salinity); the pressure exert by the seawater above (from which the depth of the sensor is estimated); and these parameters are also used to estimate the speed of sound within the sea.</p>
+		<p>The data files produced by the CTD are available <span property="sc:distribution" href="//spiddal.marine.ie/ctdDownload"><span about="http://spiddal.marine.ie/ctdDownload" typeOf="sc:DataDownload"><a property="sc:contentURL" href="http://spiddal.marine.ie/data/ctds/">here</a></span><span>. The data files contain the following columns:</p>
 		<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
 		<ul>
 			<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
@@ -159,17 +159,17 @@
 				</ul>
 			</li>
 			<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
-			<li><a href="http://vocab.nerc.ac.uk/collection/P07/current/CFSN0330/">Seawater pressure</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPDB/">decibars</a></li>
-			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/">Temperature of the seawater</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
-			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/CNDCST01/">Electrical conductivity</a> of the seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UECA/">Siemens per metre</a></li>
-			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/PSALCU01/">Salinity</a> of the seawater (salinity has <a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
-			<li><a href="http://vocab.nerc.ac.uk/collection/P01/current/SVELCV01/">Sound velocity</a> in seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVAA/">metres per second</a></li>
-			<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSDD01/">time</a> stamp in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss.ss</a>M</li>
+			<li><a href="//vocab.nerc.ac.uk/collection/P07/current/CFSN0330/">Seawater pressure</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPDB/">decibars</a></li>
+			<li><a href="//vocab.nerc.ac.uk/collection/P01/current/TEMPPR01/">Temperature of the seawater</a> in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
+			<li><a href="//vocab.nerc.ac.uk/collection/P01/current/CNDCST01/">Electrical conductivity</a> of the seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UECA/">Siemens per metre</a></li>
+			<li><a href="//vocab.nerc.ac.uk/collection/P01/current/PSALCU01/">Salinity</a> of the seawater (salinity has <a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+			<li><a href="//vocab.nerc.ac.uk/collection/P01/current/SVELCV01/">Sound velocity</a> in seawater in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVAA/">metres per second</a></li>
+			<li>Instrument <a href="//vocab.nerc.ac.uk/collection/P01/current/AHMSDD01/">time</a> stamp in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss.ss</a>M</li>
 		</ul>
 	</span>
 	<h3 id="fluorometer">Fluorometer</h3>
-	<p>A <a href="http://wetlabs.com/eco-flntu">WetLabs</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0215/">ECO-FLNTU</a> (serial number #3137) is installed on the observatory infrastructure. It measures the fluorescence of the seawater to give an estimate of the volume of chlorophyll present (indicative of the amount of phytoplankton in the seawater) and it measures turbidity, or the &quot;cloudiness&quot; of the seawater, caused by the presence of particles such as sediment from the seabed suspended in the water.</p>
-	<p>The data files produced by the fluorometer are available <a href="http://spiddal.marine.ie/data/fluorometers/">here</a>. The data files contain the following columns:</p>
+	<p>A <a href="//wetlabs.com/eco-flntu">WetLabs</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0215/">ECO-FLNTU</a> (serial number #3137) is installed on the observatory infrastructure. It measures the fluorescence of the seawater to give an estimate of the volume of chlorophyll present (indicative of the amount of phytoplankton in the seawater) and it measures turbidity, or the &quot;cloudiness&quot; of the seawater, caused by the presence of particles such as sediment from the seabed suspended in the water.</p>
+	<p>The data files produced by the fluorometer are available <a href="//spiddal.marine.ie/data/fluorometers/">here</a>. The data files contain the following columns:</p>
 	<pre><code>Date-time|InstrumentID| {Tab separated data columns}</code></pre>
 	<ul>
 		<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
@@ -186,23 +186,23 @@
 		</li>
 		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
 		<li>Instrument clock date in the format MM/DD/YYYY</li>
-		<li>Instrument clock <a href="http://vocab.nerc.ac.uk/collection/P01/current/AHMSAA01/">time</a> in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss</a></li>
-		<li>Wavelength of light used to make fluorescence measurements in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
-		<li>Chlorophyll fluorometer instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/FCNTRW01/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
-		<li>Wavelength of light used to make turbidity measurements in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
-		<li>Optical scattering turbidity sensor instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/NVLTOBS1/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+		<li>Instrument clock <a href="//vocab.nerc.ac.uk/collection/P01/current/AHMSAA01/">time</a> in the format <a href="http://vocab.nerc.ac.uk/collection/P06/current/UHMS/">hh:mm:ss</a></li>
+		<li>Wavelength of light used to make fluorescence measurements in <a href="//vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
+		<li>Chlorophyll fluorometer instrument <a href="//vocab.nerc.ac.uk/collection/P01/current/FCNTRW01/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
+		<li>Wavelength of light used to make turbidity measurements in <a href="//vocab.nerc.ac.uk/collection/P06/current/UXNM/">nanometres</a></li>
+		<li>Optical scattering turbidity sensor instrument <a href="//vocab.nerc.ac.uk/collection/P01/current/NVLTOBS1/">output (counts)</a> (<a href="http://vocab.nerc.ac.uk/collection/P06/current/UUUU/">no units</a>)</li>
 		<li>Thermistor</li>
 	</ul>
 	<h3 id="adcp">Acoustic Doppler Current Profiler</h3>
-	<p>A <a href="http://www.rdinstruments.com/">Teledyne RDI</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0938/">Workhorse Broadband 600KHz</a> acoustic Doppler current profiler (ADCP - serial number 1323) is mounted on the observatory infrastructure. It is approximately two metres above the seabed, looking up towards the sea surface. Data are collected every minute for 0.5m depth bins from 1 metre above the instrument to the surface.</p>
-	<p>Data are collected in RDI's PD0 binary format, and made available to access <a href="http://spiddal.marine.ie/data/adcps/">here</a>. A brief description of PD0 format can be found <a href="http://www.rdinstruments.com/nav_faq.aspx#etwo">here</a> and tools are available for <a href="https://github.com/aodn/imos-toolbox/wiki/RDI">Python</a>, <a href="https://cran.r-project.org/web/packages/oce/oce.pdf">R</a> and various other languages to read the PD0 files.</p>
+	<p>A <a href="//www.rdinstruments.com/">Teledyne RDI</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0938/">Workhorse Broadband 600KHz</a> acoustic Doppler current profiler (ADCP - serial number 1323) is mounted on the observatory infrastructure. It is approximately two metres above the seabed, looking up towards the sea surface. Data are collected every minute for 0.5m depth bins from 1 metre above the instrument to the surface.</p>
+	<p>Data are collected in RDI's PD0 binary format, and made available to access <a href="//spiddal.marine.ie/data/adcps/">here</a>. A brief description of PD0 format can be found <a href="http://www.rdinstruments.com/nav_faq.aspx#etwo">here</a> and tools are available for <a href="https://github.com/aodn/imos-toolbox/wiki/RDI">Python</a>, <a href="https://cran.r-project.org/web/packages/oce/oce.pdf">R</a> and various other languages to read the PD0 files.</p>
 	<p>During the current day, files are available for each minute of observation. Each night, these are concatenated to produce a daya file, and a single file is produced at the end of each month for that month's observations.</p>
 	<h3 id="hydrophone">Hydrophone</h3>
-	<p>An <a href="http://oceansonics.com/">OceanSonics</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0942/">icListen</a> hydrophone is deployed on the observatory infrastructiure to monitor ocean noise in the region of the observatory. The wave form data collected by the hydrophone is processed to a summary file by a Fast Fourier Transform. These summary files are available <a href="http://spiddal.marine.ie/data/hydrophones/">here</a>. The format of the summary files is described in this <a href="http://spiddal.marine.ie/data/pdf/iclisten_log_file_formats.pdf">file</a>.</p>
+	<p>An <a href="//oceansonics.com/">OceanSonics</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0942/">icListen</a> hydrophone is deployed on the observatory infrastructiure to monitor ocean noise in the region of the observatory. The wave form data collected by the hydrophone is processed to a summary file by a Fast Fourier Transform. These summary files are available <a href="http://spiddal.marine.ie/data/hydrophones/">here</a>. The format of the summary files is described in this <a href="http://spiddal.marine.ie/data/pdf/iclisten_log_file_formats.pdf">file</a>.</p>
 	<h3 id="acousticTelemetry">Acoustic Telemetry</h3>
         <a style="text-decoration: none" target="_blank" href="//oceantrackingnetwork.org/" title="The Ocean Tracking Network is a global aquatic animal tracking, technology devlopment and partnership platform headquartered at Dalhouse University in Canada"><img style="float: right;" src='OTNlogo.png' alt='Ocean Tracking Network logo' /></a>
         <p>This instrument is part of the <a target="_blank" href="//oceantrackingnetwork.org/">Ocean Tracking Network</a> and the data it generates is copied to Ocean Tracking Network, Dalhousie University, Halifax, Canada.</p>
-	<p>In order to receive signals from tagged fish and other sea life, a <a href="http://vemco.com/">Vemco</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0949/">VR2C</a> acoustic monitoring receiver is deployed. The receiver records the passing of acoustic tags and the identifier of the tags it records. The data are recorded to text files, with the following two formats. For summary data, the following columns are recorded:</p>
+	<p>In order to receive signals from tagged fish and other sea life, a <a href="//vemco.com/">Vemco</a> <a href="http://vocab.nerc.ac.uk/collection/L22/current/TOOL0949/">VR2C</a> acoustic monitoring receiver is deployed. The receiver records the passing of acoustic tags and the identifier of the tags it records. The data are recorded to text files, with the following two formats. For summary data, the following columns are recorded:</p>
 	<p><code>2015-11-30T10:52:02.314Z|VMVR2C450117| {comma separated data columns}</code></p>
 	<ul>
 		<li>Date-time is a time stamp from a Global Positioning System receiver at the cable observatory shore station in the format YYYY-MM-DDThh:mm:ss.sss where:
@@ -220,17 +220,17 @@
 		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
 		<li>Instrument serial number</li>
 		<li>Three-digit line counter (000-999)</li>
-		<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
+		<li>Instrument <a href="//vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
 		<li>STS is a string indicating the instrument is operating in real-time mode</li>
 		<li>DC=X gives the number of tags detected since the instrument was deployed</li>
 		<li>PC=X gives the number of acoustic pings made since the instrument was deployed</li>
-		<li>LV=X.X is the line voltage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
-		<li>BV=X.X is the battery voltage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
-		<li>BU=X.X is the battery usage in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
-		<li>I=X.X is the current impedance in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UMAM/">milliamps</a></li>
-		<li>T=X.X is the internal receiver temperature in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
-		<li>DU=X.X give the detection memory used in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
-		<li>RU=X.X is the raw memory used in <a href="http://vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>LV=X.X is the line voltage in <a href="//vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
+		<li>BV=X.X is the battery voltage in <a href="//vocab.nerc.ac.uk/collection/P06/current/UVLT/">Volts</a></li>
+		<li>BU=X.X is the battery usage in <a href="//vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>I=X.X is the current impedance in <a href="//vocab.nerc.ac.uk/collection/P06/current/UMAM/">milliamps</a></li>
+		<li>T=X.X is the internal receiver temperature in <a href="//vocab.nerc.ac.uk/collection/P06/current/UPAA/">degrees Celsius</a></li>
+		<li>DU=X.X give the detection memory used in <a href="//vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
+		<li>RU=X.X is the raw memory used in <a href="//vocab.nerc.ac.uk/collection/P06/current/UPCT/">percent</a></li>
 		<li>XYZ=X.XX:Y.YY:Z.ZZ is the tilt information in Gs (1.00:0.00:0.00 indicates a perfectly vertical mounting with the hydrophone pointing upwards)</li>
 	</ul>
 	<p>For a detection event, the line output becomes:</p>
@@ -250,7 +250,7 @@
 		<li>Instrument-ID is a unique identifier for the instrument based on its manufacturer, model number and serial number</li>
 		<li>Instrument serial number</li>
 		<li>Three-digit line counter (000-999)</li>
-		<li>Instrument <a href="http://vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
+		<li>Instrument <a href="//vocab.nerc.ac.uk/collection/P01/current/AYMDAA01/">date/time</a> in UTC as YYYY-MM-DD hh:mm:ss</li>
 		<li>Fish tag model</li>
 		<li>Fish tag id</li>
 		<li><b><i>Optional output field, dependent on fish tag model:</i></b> A2D counts</li>
@@ -261,16 +261,16 @@
 	<div class="mi-mobile-menu">
 		<ul id="superfish-5" class="menu sf-menu sf-menu-footer-manu sf-vertical sf-style-none sf-total-items-4 sf-parent-items-0 sf-single-items-4">
 			<li class="mi-mobile-li">
-				<a href="http://www.marine.ie/Home/site-area/working-us/working-us" class="mi-mobile-li">&gt; Working With Us</a><br />
+				<a href="//www.marine.ie/Home/site-area/working-us/working-us" class="mi-mobile-li">&gt; Working With Us</a><br />
 			</li>
 			<li class="mi-mobile-li">
-				<a href="http://www.marine.ie/Home/node/32" title="We the Marine Institute are committed to providing information and services that are fully accessible to people with disabilities." class="mi-mobile-li">&gt; Accessibility</a>
+				<a href="//www.marine.ie/Home/node/32" title="We the Marine Institute are committed to providing information and services that are fully accessible to people with disabilities." class="mi-mobile-li">&gt; Accessibility</a>
 			</li>
 			<li class="mi-mobile-li">
-				<a href="http://www.marine.ie/Home/site-area/online-policies/online-policies" class="mi-mobile-li">&gt; Online Policies</a>
+				<a href="//www.marine.ie/Home/site-area/online-policies/online-policies" class="mi-mobile-li">&gt; Online Policies</a>
 			</li>
 			<li class="mi-mobile-li">
-				<a href="http://www.marine.ie/Home/sitemap" title="Site map" class="mi-mobile-li">&gt; Site Map</a>
+				<a href="//www.marine.ie/Home/sitemap" title="Site map" class="mi-mobile-li">&gt; Site Map</a>
 			</li>
 		</ul>
 	</div>
@@ -278,58 +278,58 @@
 	<div class="block-inner">
         <h2 class="block-title">Subscriptions</h2>
         <div>
-			<p>Stay in touch with all that is happening in the Marine Institute. Subscribe to email notifications for our news items and vacancies <a href="http://www.marine.ie/Home/site-area/about-us/marine-institute-subscriptions?language=en">here</a>.</p>
+			<p>Stay in touch with all that is happening in the Marine Institute. Subscribe to email notifications for our news items and vacancies <a href="//www.marine.ie/Home/site-area/about-us/marine-institute-subscriptions?language=en">here</a>.</p>
 		</div>
   </div>
 	
 	<div class="SMIcon">
-		<a href="http://www.youtube.com/user/marineinstituteIRL" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Youtube.png" alt="YouTube Icon" title="YouTube Icon" width="42" height="42" /></a>
+		<a href="//www.youtube.com/user/marineinstituteIRL" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Youtube.png" alt="YouTube Icon" title="YouTube Icon" width="42" height="42" /></a>
 	</div>
 	<div class="SMIcon">
-		<a href="http://www.linkedin.com/company/marine-institute" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Linkedin.png" alt="LinkedIn Icon" title="LinkedIn Icon" width="42" height="42" /></a>
+		<a href="//www.linkedin.com/company/marine-institute" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Linkedin.png" alt="LinkedIn Icon" title="LinkedIn Icon" width="42" height="42" /></a>
 	</div>
 	<div class="SMIcon">
-		<a href="https://twitter.com/MarineInst" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Twitter.png" alt="Twitter Icon" title="Twitter Icon" width="42" height="42" /></a>
+		<a href="https://twitter.com/MarineInst" target="_blank"><img src="//www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Twitter.png" alt="Twitter Icon" title="Twitter Icon" width="42" height="42" /></a>
 	</div>
 	<div class="SMIcon">
-		<a href="http://www.facebook.com/marineinstituteireland" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Facebook.png" alt="Facebook Icon" title="Facebook Icon" width="42" height="42" /></a>
+		<a href="//www.facebook.com/marineinstituteireland" target="_blank"><img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Social-Icons_Facebook.png" alt="Facebook Icon" title="Facebook Icon" width="42" height="42" /></a>
 	</div>
 </div>
 <div class="copy">
 	<p>&copy; Marine Institute</p>
 	<div class="EULogo">
-		<img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/erdf_col_pc.jpg" alt="EU Regional Development Fund Logo" title="EU Regional Development Fund Logo" />
+		<img src="//www.marine.ie/Home/sites/default/files/MIFiles/Images/General/erdf_col_pc.jpg" alt="EU Regional Development Fund Logo" title="EU Regional Development Fund Logo" />
 	</div>
 	<div class="EULogo"">
-		<img src="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/structural-funds-logo.png" alt="EU Regional Development Fund Logo" title="EU Regional Development Fund Logo" />
+		<img src="//www.marine.ie/Home/sites/default/files/MIFiles/Images/General/structural-funds-logo.png" alt="EU Regional Development Fund Logo" title="EU Regional Development Fund Logo" />
 	</div>
 </div>
 
-<script type="text/javascript" src="http://www.marine.ie/Home/sites/all/modules/eu-cookie-compliance/js/eu_cookie_compliance.js?nw99bx"></script>
-<script type="text/javascript" src="http://www.marine.ie/Home/sites/all/libraries/share42/share42.js?nw99bx"></script>
+<script type="text/javascript" src="//www.marine.ie/Home/sites/all/modules/eu-cookie-compliance/js/eu_cookie_compliance.js?nw99bx"></script>
+<script type="text/javascript" src="//www.marine.ie/Home/sites/all/libraries/share42/share42.js?nw99bx"></script>
 
-<span about="http://www.marine.ie" typeOf="sc:Organization">
+<span about="//www.marine.ie" typeOf="sc:Organization">
 	<span property="sc:name" content="Marine Institute"></span>
-	<span property="sc:address" href="http://www.marine.ie#PostalAddress"></span>
-	<span property="sc:logo" href="http://www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Marine_logo.jpg"></span>
+	<span property="sc:address" href="//www.marine.ie#PostalAddress"></span>
+	<span property="sc:logo" href="//www.marine.ie/Home/sites/default/files/MIFiles/Images/General/Marine_logo.jpg"></span>
 	<span property="sc:alternateName" content="Foras na Mara"></span>
 	<span property="sc:description" content="The Marine Institute (Foras na Mara) is the national agency responsible to the Irish government for advice on and implementation of marine research, technology, development and innovation (RTDI) policy and marine research services that critically inform policy objectives, management and sustainable development strategies for marine resources."></span>
 </span>
 
-<span about="http://www.marine.ie#PostalAddress" typeOf="sc:PostalAddress">
+<span about="//www.marine.ie#PostalAddress" typeOf="sc:PostalAddress">
 	<span property="sc:streetAddress" content="Rinville"></span>
 	<span property="sc:addressLocality" content="Oranmore"></span>
 	<span property="sc:addressRegion" content="Galway"></span>
 	<span property="sc:addressCountry" content="IE"></span>
 </span>
 
-<span about="http://spiddal.marine.ie/adcp" typeOf="sc:Dataset">
+<span about="//spiddal.marine.ie/adcp" typeOf="sc:Dataset">
 </span>
 
-<span about="http://spiddal.marine.ie/hydrophone" typeOf="sc:Dataset">
+<span about="//spiddal.marine.ie/hydrophone" typeOf="sc:Dataset">
 </span>
 
-<span about="http://spiddal.marine.ie/fluorometer" typeOf="sc:Dataset">
+<span about="//spiddal.marine.ie/fluorometer" typeOf="sc:Dataset">
 </span>
 
 <!-- google analytics code to go here -->
