@@ -1,29 +1,4 @@
-*/1 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 5; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 10; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 15; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 20; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 25; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 30; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 35; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 40; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 45; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 50; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * sleep 55; /home/dmuser/sites/spiddal.marine.ie/bin/getctd.sh
-*/1 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 5; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 10; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 15; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 20; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 25; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 30; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 35; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 40; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 45; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 50; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * sleep 55; /home/dmuser/sites/spiddal.marine.ie/bin/getfluorometer.sh
-*/1 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getspiddalweather.sh
-*/1 * * * * sleep 30; /home/dmuser/sites/spiddal.marine.ie/bin/getspiddalweather.sh
+*/5 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getspiddalweather.sh
 
 */1 * * * * rsync -avz --remove-source-files --include '*.txt' --exclude '*' -e ssh gcouser@172.16.255.226:/home/gcouser/hydrophone/Data/ /home/dmuser/incoming/hydrophones
 */1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/hydrophones/*.txt); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/hydrophones/$(echo $item| sed -e 's#^.*/\(\(.......\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
@@ -39,7 +14,3 @@
 # monthly compress on 5th of the month
 0 6 5 * * /home/dmuser/sites/spiddal.marine.ie/bin/monthly_compress.sh
 0 4 5 * * gzip /data/ais/AIS-RINVILLE-1/$(date -d "-1 month" '+%Y/AIS-RINVILLE-1-%Y-%m.txt')
-*/1 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getsite.sh
-#*/1 * * * * ln -sf $(ls -t /data/adcps/TRDI-WHB600Hz-1323/$(date '+\%Y/\%m/\%d')/*.pd0 | head -1) /data/adcps/TRDI-WHB600Hz-1323/latest.pd0 >/dev/null 2>&1
-*/1 * * * * ln -sf $(ls -t /data/adcps/TRDI-WHB600Hz-10488/$(date '+\%Y/\%m/\%d')/*.pd0 | head -1) /data/adcps/TRDI-WHB600Hz-10488/latest.pd0 >/dev/null 2>&1
-*/1 * * * * ln -sf $(ls -t /data/hydrophones/SBF1622/$(date '+\%Y/\%m/\%d')/*.txt | head -1) /data/hydrophones/SBF1622/latest.txt >/dev/null 2>&1
