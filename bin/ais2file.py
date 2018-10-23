@@ -13,12 +13,14 @@ parser = argparse.ArgumentParser(description='Stream ais data from kafka to a fi
 parser.add_argument('--timeout', type=int, default=300, help='Number of seconds to wait for messages before giving up, default=300 (5 minutes)')
 parser.add_argument('--http-port', type=int, default=8082, help='HTTP web server port showing latest message, default is 8082')
 parser.add_argument('--verbose', type=bool, default=False, help='Whether to write to the console')
+parser.add_argument('--topic', default="ais-rinville-1", help='Name of the kafka topic containing the messages')
+parser.add_argument('--group', default="ais2file_v1", help='Name of the kafka consumer group');
 args = parser.parse_args()
 
 client = KafkaClient(hosts="kafka01:9092,kafka02:9092,kafka03:9092")
-topic = client.topics['ais-rinville-1']
+topic = client.topics[args.topic]
 consumer = topic.get_simple_consumer(auto_commit_enable=True,
-                                     consumer_group="ais2file_v1", 
+                                     consumer_group=args.group,
                                      auto_offset_reset=OffsetType.EARLIEST,
                                      reset_offset_on_start=False)
 
@@ -42,6 +44,10 @@ f_all = None
 for message in consumer:
    if message is not None:
         (timestamp,source,data) = message.value.split('|',3)
+        if source.startswith("20"): # wrong order on some early belmullet
+          tmp = timestamp
+          timestamp = source
+          source = tmp
         if(data.startswith("!AIVDM")):
             new_file_path = "/data/ais/{0}/{1}/{0}-{2}.txt".format(source,timestamp[:4],timestamp[:7])
             if new_file_path != file_path:

@@ -153,7 +153,7 @@
 					"settings": {
 						"title": "Last reading",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"Timestamp\"].substring(11).substring(0,8)",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"].time.substring(11).substring(0,8)",
 						"animate": true,
 						"units": ""
 					}
@@ -163,7 +163,7 @@
 					"settings": {
 						"title": "Chlorophyll Concentration",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"CHL\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"chl\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "&micro;g&#47;l"
@@ -174,7 +174,7 @@
 					"settings": {
 						"title": "Nephelometric Turbidity Unit (NTU)",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"NTU\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"ntu\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "NTU"
@@ -185,8 +185,8 @@
 					"settings": {
 						"title": "Graph",
 						"value": [
-							"datasources[\"spidFluor\"][\"CHL\"]",
-							"datasources[\"spidFluor\"][\"NTU\"]"
+							"datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"chl\"]",
+							"datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"ntu\"]"
 						],
 						"include_legend": true,
 						"legend": "CHL,NTU"
@@ -197,7 +197,7 @@
 					"settings": {
 						"title": "CHL",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"CHLCount\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"chl_count\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "counts"
@@ -208,7 +208,7 @@
 					"settings": {
 						"title": "NTU",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"NTUCount\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"ntu_count\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "counts"
@@ -219,7 +219,7 @@
 					"settings": {
 						"title": "Flourescence wavelength",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"FluorescenceWavelength\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"fluorescence_wavelength\"]",
 						"animate": true,
 						"units": "nm"
 					}
@@ -229,7 +229,7 @@
 					"settings": {
 						"title": "Turbidity Wavelength",
 						"size": "regular",
-						"value": "datasources[\"spidFluor\"][\"TurbidityWavelength\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-fluorometer-json\"][\"turbidity_wavelength\"]",
 						"animate": true,
 						"units": "nm"
 					}
@@ -260,7 +260,7 @@
 					"settings": {
 						"title": "time of last record",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Timestamp\"].substring(11).substring(0,8)",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"].time.substring(11).substring(0,8)",
 						"sparkline": false,
 						"animate": true
 					}
@@ -270,7 +270,7 @@
 					"settings": {
 						"title": "sea water temperature (20m)",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Temp\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"][\"temp\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "&deg;C"
@@ -281,7 +281,7 @@
 					"settings": {
 						"title": "salinity",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Sal\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"][\"sal\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "PSU"
@@ -292,7 +292,7 @@
 					"settings": {
 						"title": "pressure",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Press\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"][\"press\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "dbar"
@@ -303,7 +303,7 @@
 					"settings": {
 						"title": "sound velocity",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"SoundV\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"][\"soundv\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "m/s"
@@ -314,7 +314,7 @@
 					"settings": {
 						"title": "conductivity",
 						"size": "regular",
-						"value": "datasources[\"ctd\"][\"Cond\"]",
+						"value": "datasources[\"mqtt\"][\"spiddal-ctd-json\"][\"cond\"]",
 						"sparkline": true,
 						"animate": true,
 						"units": "mS/cm"
@@ -371,14 +371,6 @@
 						"animate": true,
 						"units": "cm"
 					}
-				},
-				{
-					"type": "google_map",
-					"settings": {
-						"lat": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][1]",
-						"lon": "datasources[\"gwaveBuoy\"][\"table\"][\"rows\"][0][0]",
-						"zlev": "7"
-					}
 				}
 			]
 		}
@@ -392,43 +384,14 @@
 			}
 		},
 		{
-			"name": "ctd",
-			"type": "JSON",
-			"settings": {
-				"url": "http://spiddal.marine.ie/data/spiddal-ctd.json",
-				"use_thingproxy": false,
-				"refresh": 5,
-				"method": "GET"
-			}
-		},
-		{
 			"name": "gwaveBuoy",
 			"type": "JSON",
 			"settings": {
 				"url": "http://erddap.marine.ie/erddap/tabledap/IWaveBNetwork.json?longitude,latitude,time,station_id,PeakPeriod,PeakDirection,UpcrossPeriod,SignificantWaveHeight,SeaTemperature&time>=now-6h&station_id=%22Galway%20Bay%20Wave%20Buoy%22&orderByMax(%22time%22)&SignificantWaveHeight>0",
 				"use_thingproxy": true,
 				"refresh": 600,
-				"method": "GET"
-			}
-		},
-		{
-			"name": "spidFluor",
-			"type": "JSON",
-			"settings": {
-				"url": "http://spiddal.marine.ie/data/spiddal-fluorometer.json",
-				"use_thingproxy": true,
-				"refresh": 5,
-				"method": "GET"
-			}
-		},
-		{
-			"name": "spidvid.cloudapp.net",
-			"type": "JSON",
-			"settings": {
-				"url": "/data/spidvid.cloudapp.net.json",
-				"use_thingproxy": true,
-				"refresh": 10,
-				"method": "GET"
+				"method": "GET",
+				"name": "gwaveBuoy"
 			}
 		},
 		{
@@ -439,6 +402,19 @@
 				"use_thingproxy": true,
 				"refresh": 30,
 				"method": "GET"
+			}
+		},
+		{
+			"name": "mqtt",
+			"type": "mqtt",
+			"settings": {
+				"topic": "spiddal-fluorometer-json,spiddal-ctd-json",
+				"server": "mqtt.marine.ie",
+				"port": 1883,
+				"use_encryption": false,
+				"client_id": "quickstart",
+				"username": "",
+				"password": ""
 			}
 		}
 	],
