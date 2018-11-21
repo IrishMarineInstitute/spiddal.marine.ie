@@ -410,15 +410,12 @@ document.getElementById('caption-time').addEventListener('click',toggleTimeSlide
 var source = document.createElement("source");
 source.id = "video-src";
 source.setAttribute("type","video/mp4");
-var url = getVideoUrls()[0];
-source.setAttribute("src",url);
 video.appendChild(source);
 var nextsource = document.createElement("source");
 nextsource.id = "next-video-src";
 nextsource.setAttribute("type","video/mp4");
-url = getVideoUrls()[1];
-nextsource.setAttribute("src",url);
 document.getElementById("next-video").appendChild(nextsource);
+
 var showVideoByDate = function(wanted){
      getVideoUrlsForDate(wanted).then(function(urls){
         var datestring = toISOString(wanted);
@@ -454,7 +451,7 @@ var showVideoByHash = function(force){
      datestring = hash.substring(1,20)+"Z";
    }
    if(datestring == document.getElementById('caption').innerText && !force){
-     return;
+     return false;
    }
    var wanted = new Date(datestring);
    if(!isNaN( wanted.getTime())){
