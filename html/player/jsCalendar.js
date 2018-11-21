@@ -1231,7 +1231,7 @@ var jsCalendar = (function(){
     };
     
     // Get a new object
-    JsCalendar.new = function(){
+    JsCalendar["new"] = function(){
         // Create new object
         var obj = new JsCalendar();
         // Construct calendar
@@ -1305,10 +1305,12 @@ var jsCalendar = (function(){
 
 // I love anonymous functions
 (function(){
-    // Init auto calendars
-    // After the page loads
-    window.addEventListener("load", function() {
+    if(window.addEventListener){
+      // Init auto calendars
+      // After the page loads
+      window.addEventListener("load", function() {
         // Get calendars
         jsCalendar.autoFind();
-    }, false);
+      }, false);
+    }
 })();

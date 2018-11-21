@@ -13,11 +13,14 @@
     }
     
     #player {
-    	float:left;
-    	padding:1em 1em .5em;
+        width: 500px;
     	background-color:black;
-      border:2px solid darkgreen;
-      border-radius: 9px;
+    }
+    .left {
+       float: left;
+    }
+    .right {
+       float: right;
     }
     .jsCalendar.player-calendar tbody td.jsCalendar-current {
         background-color: darkgreen;
@@ -34,14 +37,13 @@
         color: white;
     }
     #controls {
-      border: 1px solid darkgreen;
       width: 420px;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
       margin-top: 5px;
       padding-bottom: 3px;
-      border-radius: 7px;
+      background-color: black;
     }
     #caption {
        font-size: 0.9em;
@@ -54,9 +56,7 @@
     }
     
     video {
-    	border:1px solid darkgreen;
-    	width:420px;
-    	height:231px;
+    	width: 100%;
     	background:black;
     }
    .speed {

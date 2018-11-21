@@ -1,35 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
+<meta charset="UTF-8">
 <title>spiddal.marine.ie video player</title>
 <link rel="stylesheet" type="text/css" href="player.css" />
 		<link rel="stylesheet" type="text/css" href="jsCalendar.css">
 		<link rel="stylesheet" type="text/css" href="jsCalendar.clean.css">
 
 		<!-- jsCalendar -->
-		<script type="text/javascript" src="jsCalendar.js"></script>
+		<script src="jsCalendar.js"></script>
 
+<!--
+                    <script src='addEventListener-polyfill.js'></script>
+-->
 		<!--[if lt IE 9]>
+
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 		<![endif]-->
+   <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+<script src="https://unpkg.com/unfetch/polyfill"></script>
 </head>
 <body>
 <div id='player'>
 <!--
 <video id="video" width="50%" height="50%" autoplay="true" muted="muted" controls>
 -->
-  <video id="video" autoplay="true" muted="muted" ></video>
+  <video id="video" autoplay muted="muted" ></video>
    <div id='my-calendar' class='player-calendar'></div>
     <div id="time-select" style="display: none">
       <input type="range" id="time-select-bar" title="time" min="0" max="100" value="0" step="1" style="display: none">
      <div id="time-min" style="font-size: smaller; float: left"></div><div id="time-max" style="float: right; font-size: smaller"></div>
     </div>
    <div id='controls'>
-      <div id='caption'><span id='caption-date'></span><span id='caption-t'></span><span id='caption-time'></span><span id='caption-z'></span></div>
-      <input type="range" id="progress-bar" title="volume" min="0" max="100" value="0">
+      <div id='caption'><span id='caption-date' title='click to change date'></span><span id='caption-t'></span><span id='caption-time' title='click to change time'></span><span id='caption-z'></span></div>
+      <input type="range" id="progress-bar" title="position this fragment" min="0" max="100" value="0" />
+<span class="left">
 			<button id='btnReplay' class='replay' title='replay' accesskey="R" onclick='replayVideo();'>Replay</button>	
 			<button id='btnPlayPause' class='play' title='play' accesskey="P" onclick='playPauseVideo();'>Play</button>
       <button id='btnFullScreen' class='fullscreen' title='toggle full screen' accesskey="T" onclick='toggleFullScreen();'>[&nbsp;&nbsp;]</button>
+</span>
+<span class="right">
 			<button id='speed' class='speed' title='playback speed' accesskey="" >Playback Speed</button>
                  <select id='speed-selector' class='playback-speed' style='display: none'>
                    <option value="10">10x</option>
@@ -41,9 +51,10 @@
                  </select>
 			<button id='share' class='share' title='share' accesskey="">Share</button>
 			<button id='picture' class='picture' title='Download a still photo' accesskey="">Picture</button>
-	</div>
+	</span>
+&nbsp;
        <div id="sharing" style="display: none">
-          <ytd-share-target-renderer class="style-scope ytd-third-party-share-target-section-renderer" role="option">
+          <ytd-share-target-renderer class="style-scope ytd-third-party-share-target-section-renderer" >
     
     <button id="twitter" class="social" title="Share video on Twitter">
       <yt-icon class="icon-resize style-scope ytd-share-target-renderer"><svg viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet" focusable="false" class="style-scope yt-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope yt-icon">
@@ -55,12 +66,13 @@
     
     
   </yt-icon>
-      <div id="title" class="style-scope ytd-share-target-renderer">Twitter</div>
+      <span id="title" class="style-scope ytd-share-target-renderer">Twitter</span>
     </button>
   </ytd-share-target-renderer>
-       </div>
+  </div>
+
 </div>
-<video id="next-video" style="display:none" width="50%" height="50%" muted="muted" >
+<video id="next-video" style="display:none" muted="muted" >
 </video>
 <script>
 var default_video_urls = ["https://spiddal.marine.ie/data/video/aja-helo-1H000314/2018/04/03/aja-helo-1H000314_2018-04-03_0000.mp4", "https://spiddal.marine.ie/data/video/aja-helo-1H000314/2018/04/03/aja-helo-1H000314_2018-04-03_0000.mp4"];
@@ -111,12 +123,12 @@ var  fetchVideoDaysInMonth = function(date){
       }
     }
     resolve(wanted);
-  }).catch(function(error) {
+  })["catch"](function(error) {
     reject(error);
   });
   });
   memoizedPromises[key] = promise;
-  return promise
+  return promise;
 }
 
 var getVideoUrlsForDate = function(date){
@@ -138,7 +150,7 @@ var getVideoUrlsForDate = function(date){
       }
     }
     resolve(wanted);
-  }).catch(function(error) {
+  })["catch"](function(error) {
     reject(error);
   });
   });
@@ -210,7 +222,7 @@ video.onloadedmetadata = function(){
   if(this.textTracks.length == 0){
      var tt = this.addTextTrack("subtitles", "English", "en");
      tt.oncuechange = function(){
-       var cue = this.activeCues[0];
+       var cue = this.activeCues.length > 0?  this.activeCues[0] :  undefined;
        if(cue && timeSelector.style.display == "none"){
          document.getElementById('caption-date').innerText = cue.text.substring(0,10);
          document.getElementById('caption-t').innerText = 'T';
@@ -380,7 +392,7 @@ var toggleCalendar = function(){
     if(element.className.indexOf('jsCalendar')<0){
       hideTimeSelector();
       var date = getDisplayDate();
-      var calendar = jsCalendar.new(element, date,
+      var calendar = jsCalendar["new"](element, date,
        {
          monthFormat: "month YYYY"
        });
@@ -636,5 +648,19 @@ document.addEventListener("MSFullscreenChange", onFullScreenChange);
     }
   }
 </script>
+<script>
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+</script>
+</div>
 </body>
 </html>
