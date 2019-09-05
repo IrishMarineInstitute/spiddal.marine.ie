@@ -11,7 +11,7 @@ for TYPE in $(echo $TAR_TYPES);
    EXT=$(eval echo \$ext_${TYPE})
    for DEVICE in $(ls -1 $DATA_DIR/$TYPE/);
    do FNAME=${DEVICE}_${FILE_DATE};
-     cd $DATA_DIR/$TYPE/$DEVICE/ && tar cfz ${FNAME}.tgz ${MONTH_DATE}/*/*.tgz --transform 's#.*/##g' && zip  -q -j ${FNAME} ${MONTH_DATE}/*/*.zip
+     ls -d $DATA_DIR/$TYPE/$DEVICE/$MONTH_DATE >/dev/null 2>&1 && cd $DATA_DIR/$TYPE/$DEVICE/ && tar cfz ${FNAME}.tgz ${MONTH_DATE}/*/*.tgz --transform 's#.*/##g' && zip  -q -j ${FNAME} ${MONTH_DATE}/*/*.zip
   done
 done
 for TYPE in $(echo $CAT_TYPES);
@@ -19,7 +19,7 @@ for TYPE in $(echo $CAT_TYPES);
    EXT=$(eval echo \$ext_${TYPE})
    for DEVICE in $(ls -1 $DATA_DIR/$TYPE/);
    do FNAME=${DEVICE}_${FILE_DATE};
-     cd $DATA_DIR/$TYPE/$DEVICE/ && tar cfz ${FNAME}.tgz ${MONTH_DATE}/*/${DEVICE}_????????${EXT} --transform 's#.*/##g' && zip -q -j ${FNAME} ${MONTH_DATE}/*/${DEVICE}_????????${EXT}
+     ls -d $DATA_DIR/$TYPE/$DEVICE/$MONTH_DATE >/dev/null 2>&1 && cd $DATA_DIR/$TYPE/$DEVICE/ && tar cfz ${FNAME}.tgz ${MONTH_DATE}/*/${DEVICE}_????????${EXT} --transform 's#.*/##g' && zip -q -j ${FNAME} ${MONTH_DATE}/*/${DEVICE}_????????${EXT}
   done
 done
 for TYPE in $(echo $MONTHLY_CAT_TYPES);
@@ -27,6 +27,6 @@ for TYPE in $(echo $MONTHLY_CAT_TYPES);
    EXT=$(eval echo \$ext_${TYPE})
    for DEVICE in $(ls -1 $DATA_DIR/$TYPE/);
    do FNAME=${DEVICE}_${FILE_DATE};
-     cd $DATA_DIR/$TYPE/$DEVICE/ && rm -f ${FNAME}${EXT} && cat ${MONTH_DATE}/*/${DEVICE}_????????${EXT} > ${FNAME}${EXT}
+     ls -d $DATA_DIR/$TYPE/$DEVICE/$MONTH_DATE >/dev/null 2>&1 && cd $DATA_DIR/$TYPE/$DEVICE/ && rm -f ${FNAME}${EXT} && cat ${MONTH_DATE}/*/${DEVICE}_????????${EXT} > ${FNAME}${EXT}
   done
 done

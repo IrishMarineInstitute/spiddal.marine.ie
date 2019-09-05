@@ -8,7 +8,7 @@ for TYPE in $(echo $TAR_TYPES);
    EXT=$(eval echo \$ext_${TYPE})
    for DEVICE in $(ls -1 $DATA_DIR/$TYPE/);
    do FNAME=${DEVICE}_${FILE_DATE};
-     cd $DATA_DIR/$TYPE/$DEVICE/$DIR_DATE && tar cfz ${FNAME}.tgz *${EXT} && zip  -q ${FNAME}  *${EXT}
+     cd $DATA_DIR/$TYPE/$DEVICE/$DIR_DATE 2>/dev/null && tar cfz ${FNAME}.tgz *${EXT} && zip  -q ${FNAME}  *${EXT}
   done
 done
 for TYPE in $(echo $CAT_TYPES);
@@ -16,6 +16,6 @@ for TYPE in $(echo $CAT_TYPES);
    EXT=$(eval echo \$ext_${TYPE})
    for DEVICE in $(ls -1 $DATA_DIR/$TYPE/);
    do FNAME=${DEVICE}_${FILE_DATE};
-     cd $DATA_DIR/$TYPE/$DEVICE/$DIR_DATE && rm -f ${FNAME}${EXT} && cat *${EXT} > ${FNAME}${EXT}
+     cd $DATA_DIR/$TYPE/$DEVICE/$DIR_DATE 2>/dev/null && rm -f ${FNAME}${EXT} && cat *${EXT} > ${FNAME}${EXT}
   done
 done
