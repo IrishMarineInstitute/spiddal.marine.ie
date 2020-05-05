@@ -17,7 +17,7 @@ parser.add_argument('--topic', default="ais-rinville-1", help='Name of the kafka
 parser.add_argument('--group', default="ais2file_v1", help='Name of the kafka consumer group');
 args = parser.parse_args()
 
-client = KafkaClient(hosts="kafka01:9092,kafka02:9092,kafka03:9092")
+client = KafkaClient(hosts="dmkaf01:9092,dmkaf02:9092,dmkaf03:9092")
 topic = client.topics[args.topic]
 consumer = topic.get_simple_consumer(auto_commit_enable=True,
                                      consumer_group=args.group,
