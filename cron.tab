@@ -1,8 +1,5 @@
 */5 * * * * /home/dmuser/sites/spiddal.marine.ie/bin/getspiddalweather.sh
 
-#*/1 * * * * rsync -avz --remove-source-files --include '*.txt' --exclude '*' -e ssh gcouser@172.16.255.226:/home/gcouser/hydrophone/Data/ /home/dmuser/incoming/hydrophones
-# */1 * * * * rsync -avz --remove-source-files --include '*.txt' -e ssh "opsuser@172.16.255.13:/home/opsuser/dev/docker/hydrophone/data/outgoing/*" /home/dmuser/sites/spiddal.marine.ie/html/data/hydrophones/
-#*/1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/hydrophones/*.txt); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/hydrophones/$(echo $item| sed -e 's#^.*/\(\(.......\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
 */1 * * * * rsync -avz --exclude '*.tmp' --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/adcp/ /home/dmuser/incoming/adcps
 */1 * * * * sleep 10; for item in $(ls -1 /home/dmuser/incoming/adcps/*.pd0); do target=/home/dmuser/sites/spiddal.marine.ie/html/data/adcps/$(echo $item| sed -e 's#^.*/\(\([^_]*\)_\(....\)\(..\)\(..\)\(.*\)$\)#\2/\3/\4/\5/#') && mkdir -p $target && mv $item $target ; done
 */1 * * * * rsync -avz --remove-source-files -e ssh gcouser@172.16.255.226:/home/gcouser/fluorometer/Data/ /home/dmuser/incoming/fluorometers
